@@ -1,2 +1,2 @@
 # YarnShop
-Pnline shop for yarn selling
+Online shop for yarn selling
