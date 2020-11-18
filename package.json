@@ -1,0 +1,27 @@
+{
+  "name": "yarnshop",
+  "version": "1.0.0",
+  "description": "Yarn shop Astana",
+  "main": "server.js",
+  "scripts": {
+    "start": "node yarn-back/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtemSavossin/YarnShop.git"
+  },
+  "author": "Artyom Savossin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ArtemSavossin/YarnShop/issues"
+  },
+  "homepage": "https://github.com/ArtemSavossin/YarnShop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
