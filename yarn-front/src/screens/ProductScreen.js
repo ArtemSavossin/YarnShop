@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap"
-import Rating from "../components/Rating"
+import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
 
 import { listProductsDetails } from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
 
-const ProductScreen = ({ match }) => {
-  console.log(match.params.id)
+const ProductScreen = ({ history, match }) => {
+  const [qty, setQty] = useState(1)
+  const id = match.params.id
   const dispatch = useDispatch()
   const productDetail = useSelector((state) => state.productDetail)
   const { loading, error, product } = productDetail
   useEffect(() => {
     dispatch(listProductsDetails(match.params.id))
   }, [dispatch, match])
-
+  const addToCartHandler = (match) => {
+    history.push(`/cart/${id}?qty=${qty}`)
+  }
   return (
     <>
       <Link className='btn btn-dark my-3' to='/'>
@@ -40,7 +42,7 @@ const ProductScreen = ({ match }) => {
               <ListGroup.Item>
                 <h4>{product.name}</h4>
               </ListGroup.Item>
-              <ListGroup.Item>{product.descript}</ListGroup.Item>
+              <ListGroup.Item>{product.description}</ListGroup.Item>
               <ListGroup.Item>Цена: {product.price}〒</ListGroup.Item>
             </ListGroup>
           </Col>
@@ -54,15 +56,33 @@ const ProductScreen = ({ match }) => {
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  {product.countInStock
-                    ? `Доступно : ${product.countInStock} штук`
-                    : "Нет на складе"}
+                  {product.countInStock ? (
+                    <Row>
+                      <Col>Количество:</Col>
+                      <Col>
+                        <Form.Control
+                          as='select'
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                        >
+                          {[...Array(product.countInStock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  ) : (
+                    "Нет на складе"
+                  )}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
                     className='btn-block'
                     type='button'
                     disabled={!product.countInStock}
+                    onClick={addToCartHandler}
                   >
                     Добавить в корзину
                   </Button>
