@@ -1,7 +1,15 @@
 import React from "react"
-import { Navbar, Nav, Container } from "react-bootstrap"
+import {useDispatch, useSelector} from 'react-redux'
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
+import {logout} from '../actions/userActions'
 const Header = () => {
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
   return (
     <header>
       <Navbar expand='md' style={{ backgroundColor: "#9696ea" }}>
@@ -21,7 +29,14 @@ const Header = () => {
                   Корзина
                 </Nav.Link>
               </LinkContainer>
-
+              {userInfo ? (
+                <NavDropdown title={userInfo.name} id = 'username'>
+                  <LinkContainer to ='/profile'>
+                    <NavDropdown.Item>Профиль</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={logoutHandler}>Выйти</NavDropdown.Item>
+                </NavDropdown>
+              ) : (
               <LinkContainer to='/sign-in'>
                 <Nav.Link>
                   <i
@@ -31,6 +46,7 @@ const Header = () => {
                   Аккаунт
                 </Nav.Link>
               </LinkContainer>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
