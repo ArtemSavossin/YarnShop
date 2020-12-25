@@ -20,7 +20,9 @@ const LoginScreen = ({history,location}) => {
   const {loading, error, userInfo} = userLogin
 
   useEffect(() => {
-    if (userInfo) {
+      console.log('JJJJOPKAAA!!!')
+      if (userInfo) {
+      console.log('JJJJOPKAAA')
       history.push(redirect)
     }
   }, [history, userInfo, redirect])
