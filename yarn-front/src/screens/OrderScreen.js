@@ -11,64 +11,70 @@ import {
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { saveShippingAddress } from "../actions/cartActions"
-import { createOrder } from "../actions/orderActions"
+import { getOrderDetails } from "../actions/orderActions"
 import Message from "../components/Message"
-import CheckoutSteps from "../components/CheckoutSteps"
+import Loader from "../components/Loader"
 
-const PaymentScreen = ({ history }) => {
+const OrderScreen = ({ match }) => {
+  const orderId = match.params.id
   const dispatch = useDispatch()
 
-  const cart = useSelector((state) => state.cart)
-  const { shippingAddress } = cart
-
-  cart.itemsPrice = cart.cartItems.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  )
-  if (!shippingAddress) {
-    history.push("/shipping")
-  }
-  const orderCreate = useSelector((state) => state.orderCreate)
-
-  const { order, success, error } = orderCreate
-
-  useEffect(() => {
-    if (success) {
-      history.push(`/orders/${order._id}`)
-    }
-    // eslint-disable-next-line
-  }, [success, history])
-  const placeOrderHandler = () => {
-    dispatch(
-      createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        itemsPrice: cart.itemsPrice,
-      })
+  const orderDetails = useSelector((state) => state.orderDetails)
+  const { order, loading, error } = orderDetails
+  if (!loading) {
+    order.itemsPrice = order.orderItems.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
     )
   }
-  return (
+  useEffect(() => {
+    if (!order || order._id !== orderId) {
+      dispatch(getOrderDetails(orderId))
+    }
+  }, [dispatch, orderId, order])
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant='dander'>{error}</Message>
+  ) : (
     <Container>
-      <CheckoutSteps step1 step2 step3 />
-      <h2>Подтверждение заказа</h2>
+      <h2>Детали заказа {order._id}</h2>
       <Row>
-        <Col md={8}>
+        <Col sm={4} style={{ marginTop: "24px" }}>
+          <Card>
+            <ListGroup>
+              <ListGroup.Item>Принят в обработку ✅</ListGroup.Item>
+              <ListGroup.Item>Оплачен {order.isPaid && `✅`}</ListGroup.Item>
+              <ListGroup.Item>
+                Доставлен {order.isDelivered && `✅`}
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
+        </Col>
+        <Col sm={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h3>Доставка</h3>
               <p>
+                <strong>Пользователь: </strong> {order.user.name}
+              </p>
+              <p>
+                <strong>Почта: </strong>{" "}
+                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+              </p>
+              <p>
                 <strong>Адрес : </strong>
-                {cart.shippingAddress.city}, {cart.shippingAddress.address},{" "}
-                {cart.shippingAddress.zipCode}
+                {order.shippingAddress.city}, {order.shippingAddress.address},{" "}
+                {order.shippingAddress.zipCode}
               </p>
             </ListGroup.Item>
             <ListGroup.Item>
               <h3>Вещи:</h3>
-              {cart.cartItems.length === 0 ? (
+              {order.orderItems.length === 0 ? (
                 <Message>Ваша корзина пуста</Message>
               ) : (
                 <ListGroup variant='flush'>
-                  {cart.cartItems.map((item, index) => {
+                  {order.orderItems.map((item, index) => {
                     return (
                       <ListGroup.Item key={index}>
                         <Row>
@@ -95,32 +101,20 @@ const PaymentScreen = ({ history }) => {
                   })}
                   <ListGroup.Item>
                     <Row>
-                      <Col xs={2}>
+                      <Col xs={4}>
                         <strong>Итого: </strong>
                       </Col>
-                      <Col xs={10}>{cart.itemsPrice}〒</Col>
+                      <Col xs={8}>{order.itemsPrice}〒</Col>
                     </Row>
                   </ListGroup.Item>
                 </ListGroup>
               )}
             </ListGroup.Item>
-            <ListGroup.Item>
-              {error && <Message variant='danger'>{error}</Message>}
-            </ListGroup.Item>
           </ListGroup>
         </Col>
       </Row>
-
-      <Button
-        type='button'
-        className='mt-3'
-        disabled={cart.cartItems === 0}
-        onClick={placeOrderHandler}
-      >
-        Подвтердить заказ
-      </Button>
     </Container>
   )
 }
 
-export default PaymentScreen
+export default OrderScreen

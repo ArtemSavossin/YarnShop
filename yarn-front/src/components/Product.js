@@ -7,7 +7,7 @@ const Product = ({ product, notYarn }) => {
     <Link
       to={`/product/${product._id}`}
       style={{ color: "black" }}
-      class='text-decoration-none'
+      className='text-decoration-none'
     >
       <Card className='my-3 p-3 rounded'>
         <Link to={`/product/${product._id}`}>

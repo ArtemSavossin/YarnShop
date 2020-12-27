@@ -11,18 +11,20 @@ import RegisterScreen from "./screens/RegisterScreen"
 import ProfileScreen from "./screens/ProfileScreen"
 import ShippingScreen from "./screens/ShippingScreen"
 import PaymentScreen from "./screens/PaymentScreen"
+import OrderScreen from "./screens/OrderScreen"
 
 function App() {
   return (
     <Router>
       <Header />
-      <main className='py-3' style={{ backgroundColor: "#e6e6fa" }}>
+      <main className='py-3'>
         <Container>
           <Route path='/' component={HomeScreen} exact />
           <Route path='/sign-in' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/product/:id' component={ProductScreen} />
+          <Route path='/orders/:id' component={OrderScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/payment' component={PaymentScreen} />
