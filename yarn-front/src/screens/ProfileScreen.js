@@ -142,7 +142,9 @@ const ProfileScreen = ({ history, location }) => {
                     <td>{order.isFinished ? "✅" : "❌"}</td>
                     <td>
                       <LinkContainer to={`/orders/${order._id}`}>
-                        <Button variant='light'>Подробнее</Button>
+                        <Button className='btn-sm' variant='light'>
+                          Подробнее
+                        </Button>
                       </LinkContainer>
                     </td>
                   </tr>
