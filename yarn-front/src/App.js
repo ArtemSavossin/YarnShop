@@ -20,6 +20,7 @@ import OrderListScreen from "./screens/OrderListScreen"
 
 //TODO send notifications on new order
 //TODO back to home screen with pages
+//TODO add popup on first vizit
 
 function App() {
   return (
