@@ -12,6 +12,7 @@ node_modules/
 
 # production
 /build
+/yarn-front/build
 
 # misc
 .DS_Store

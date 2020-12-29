@@ -8,6 +8,10 @@ import Loader from "../components/Loader"
 //import FormContainer from '../components/FormContainer.js'
 import { getUserDetails, updateUserProfile } from "../actions/userActions"
 import { listMyOrders } from "../actions/orderActions"
+import {
+  USER_UPDATE_PROFILE_RESET,
+  USER_UPDATE_PROFILE_SUCCESS,
+} from "../constants/userConstants"
 
 const ProfileScreen = ({ history, location }) => {
   const [email, setEmail] = useState("")
@@ -34,7 +38,8 @@ const ProfileScreen = ({ history, location }) => {
     if (!userInfo) {
       history.push("/sign-in")
     } else {
-      if (!user || !user.name) {
+      if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails("profile"))
         dispatch(listMyOrders())
       } else {
@@ -42,7 +47,7 @@ const ProfileScreen = ({ history, location }) => {
         setEmail(user.email)
       }
     }
-  }, [history, userInfo, dispatch, user])
+  }, [history, userInfo, dispatch, user, success])
 
   const submitHandler = (e) => {
     e.preventDefault()

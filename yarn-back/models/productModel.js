@@ -73,6 +73,10 @@ const productSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    toShowRoom: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

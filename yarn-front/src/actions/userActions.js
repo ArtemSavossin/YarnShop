@@ -235,6 +235,12 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       type: USER_DELETE_SUCCESS,
       success: true,
     })
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    })
+
+    localStorage.setItem("userInfo", JSON.stringify(data))
   } catch (e) {
     dispatch({
       type: USER_DELETE_FAIL,

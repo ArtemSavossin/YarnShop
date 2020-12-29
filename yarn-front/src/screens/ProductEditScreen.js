@@ -18,6 +18,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState("")
   const [uploading, setUploading] = useState(false)
+  const [toShow, setToShow] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -31,6 +32,7 @@ const ProductEditScreen = ({ match, history }) => {
     success: successUpdate,
   } = productUpdate
 
+  console.log(product)
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET })
@@ -45,6 +47,7 @@ const ProductEditScreen = ({ match, history }) => {
         setCategory(product.category)
         setCountInStock(product.countInStock)
         setDescription(product.description)
+        setToShow(product.toShowRoom)
       }
     }
   }, [dispatch, history, productId, product, successUpdate])
@@ -83,6 +86,7 @@ const ProductEditScreen = ({ match, history }) => {
         category,
         description,
         countInStock,
+        toShowRoom: toShow,
       })
     )
   }
@@ -162,11 +166,22 @@ const ProductEditScreen = ({ match, history }) => {
             <Form.Group controlId='description'>
               <Form.Label>Описание</Form.Label>
               <Form.Control
-                type='text'
+                as='textarea'
                 placeholder='Enter description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='toShow'>
+              <Form.Check
+                type='checkbox'
+                label='Добавить в особые предложения'
+                value={toShow}
+                onChange={(e) => {
+                  setToShow(!toShow)
+                }}
+              />
             </Form.Group>
 
             <Button type='submit' variant='primary'>

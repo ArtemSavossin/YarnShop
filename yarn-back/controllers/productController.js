@@ -2,9 +2,24 @@ import asyncHandler from "express-async-handler"
 import Product from "../models/productModel.js"
 
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({})
+  const pageSize = 12
 
-  res.json(products)
+  const page = Number(req.query.pageNumber) || 1
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {}
+
+  const count = await Product.countDocuments({ ...keyword })
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
+  res.json({ products, page, pages: Math.ceil(count / pageSize) })
 })
 
 const getProductById = asyncHandler(async (req, res) => {
@@ -40,6 +55,7 @@ const createProduct = asyncHandler(async (req, res) => {
     category: "yarn",
     countInStock: 0,
     description: "Sample description",
+    toShowRoom: false,
   })
 
   const createdProduct = await product.save()
@@ -58,6 +74,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     brand,
     category,
     countInStock,
+    toShowRoom,
   } = req.body
 
   const product = await Product.findById(req.params.id)
@@ -70,6 +87,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.brand = brand
     product.category = category
     product.countInStock = countInStock
+    product.toShowRoom = toShowRoom
 
     const updatedProduct = await product.save()
     res.json(updatedProduct)
@@ -79,10 +97,15 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 })
 
+const getShowingProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({ toShowRoom: true })
+  res.json(products)
+})
 export {
   getProducts,
   getProductById,
   deleteProduct,
   createProduct,
   updateProduct,
+  getShowingProducts,
 }

@@ -6,6 +6,7 @@ import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
 import { listProductsDetails } from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
+import Meta from "../components/Meta"
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
@@ -21,6 +22,7 @@ const ProductScreen = ({ history, match }) => {
   }
   return (
     <>
+      <Meta title={`${product.name}`} />
       <Link className='btn btn-dark my-3' to='/'>
         К пряже
       </Link>
@@ -42,7 +44,17 @@ const ProductScreen = ({ history, match }) => {
               <ListGroup.Item>
                 <h4>{product.name}</h4>
               </ListGroup.Item>
-              <ListGroup.Item>{product.description}</ListGroup.Item>
+              <ListGroup.Item>
+                {product.description &&
+                  product.description.split("\n").map((item, key) => {
+                    return (
+                      <span key={key}>
+                        {item}
+                        <br />
+                      </span>
+                    )
+                  })}
+              </ListGroup.Item>
               <ListGroup.Item>Цена: {product.price}〒</ListGroup.Item>
             </ListGroup>
           </Col>
