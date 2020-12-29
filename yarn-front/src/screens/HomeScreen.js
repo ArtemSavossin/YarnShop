@@ -10,6 +10,7 @@ const HomeScreen = () => {
   const dispatch = useDispatch()
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
+  console.log(products)
   useEffect(() => {
     dispatch(listProducts())
   }, [dispatch])
@@ -22,19 +23,20 @@ const HomeScreen = () => {
         <Message variant='danger' children={error} />
       ) : (
         <Row>
-          {products.map((p) => (
-            <Col
-              xs={6}
-              sm={6}
-              md={4}
-              lg={3}
-              xl={3}
-              className='p-1'
-              key={p.name}
-            >
-              <Product product={p} />
-            </Col>
-          ))}
+          {products &&
+            products.map((p) => (
+              <Col
+                xs={6}
+                sm={6}
+                md={4}
+                lg={3}
+                xl={3}
+                className='p-1'
+                key={p.name}
+              >
+                <Product product={p} />
+              </Col>
+            ))}
         </Row>
       )}
     </>

@@ -11,16 +11,35 @@ import {
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { saveShippingAddress } from "../actions/cartActions"
-import { getOrderDetails } from "../actions/orderActions"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
+import {
+  getOrderDetails,
+  payOrder,
+  deliverOrder,
+  deleteOrder,
+} from "../actions/orderActions"
+import {
+  ORDER_PAY_RESET,
+  ORDER_DELIVER_RESET,
+} from "../constants/orderConstants"
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
   const dispatch = useDispatch()
 
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
+
+  const orderPay = useSelector((state) => state.orderPay)
+  const { loading: loadingPay, success: successPay } = orderPay
+
+  const orderDeliver = useSelector((state) => state.orderDeliver)
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   if (!loading) {
     order.itemsPrice = order.orderItems.reduce(
       (acc, item) => acc + item.price * item.qty,
@@ -28,10 +47,28 @@ const OrderScreen = ({ match }) => {
     )
   }
   useEffect(() => {
-    if (!order || order._id !== orderId) {
+    if (!userInfo) {
+      history.push("/login")
+    }
+    if (!order || order._id !== orderId || successDeliver || successPay) {
+      dispatch({ type: ORDER_PAY_RESET })
+      dispatch({ type: ORDER_DELIVER_RESET })
       dispatch(getOrderDetails(orderId))
     }
-  }, [dispatch, orderId, order])
+  }, [dispatch, orderId, order, successDeliver, successPay])
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order))
+  }
+  const payHandler = () => {
+    dispatch(payOrder(order._id))
+  }
+  const deleteHandler = () => {
+    if (window.confirm("Точно удаляем заказ?")) {
+      dispatch(deleteOrder(order._id))
+      history.push("/admin/orderlist")
+    }
+  }
   return loading ? (
     <Loader />
   ) : error ? (
@@ -46,7 +83,7 @@ const OrderScreen = ({ match }) => {
               <ListGroup.Item>Принят в обработку ✅</ListGroup.Item>
               <ListGroup.Item>Оплачен {order.isPaid && `✅`}</ListGroup.Item>
               <ListGroup.Item>
-                Доставлен {order.isDelivered && `✅`}
+                Доставлен {order.isFinished && `✅`}
               </ListGroup.Item>
             </ListGroup>
           </Card>
@@ -110,6 +147,43 @@ const OrderScreen = ({ match }) => {
                 </ListGroup>
               )}
             </ListGroup.Item>
+            {loadingDeliver && <Loader />}
+            {loadingPay && <Loader />}
+            {userInfo && userInfo.isAdmin && !order.isPaid && (
+              <ListGroup.Item>
+                <Button
+                  type='button'
+                  className='btn btn-block'
+                  onClick={payHandler}
+                >
+                  Пометить оплаченым
+                </Button>
+              </ListGroup.Item>
+            )}
+            {userInfo && userInfo.isAdmin && order.isPaid && !order.isFinished && (
+              <ListGroup.Item>
+                <Button
+                  type='button'
+                  className='btn btn-block'
+                  onClick={deliverHandler}
+                >
+                  Пометить доставленым
+                </Button>
+              </ListGroup.Item>
+            )}
+
+            {userInfo && userInfo.isAdmin && (
+              <ListGroup.Item>
+                <Button
+                  type='button'
+                  className='btn btn-block'
+                  variant='danger'
+                  onClick={deleteHandler}
+                >
+                  Удалить заказ
+                </Button>
+              </ListGroup.Item>
+            )}
           </ListGroup>
         </Col>
       </Row>

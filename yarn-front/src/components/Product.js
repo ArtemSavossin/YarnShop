@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import Rating from "../components/Rating"
 const Product = ({ product, notYarn }) => {
+  console.log("Image", product.image)
   return (
     <Link
       to={`/product/${product._id}`}
