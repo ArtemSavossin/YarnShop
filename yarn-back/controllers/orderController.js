@@ -3,32 +3,6 @@ import Order from "../models/orderModel.js"
 import nodemailer from "nodemailer"
 import { Email, Item, Span, A, renderEmail, Box } from "react-html-email"
 
-const generateEmail = (order) => {
-  renderEmail(
-    <Email title={`Заказ ${order._id}`}>
-      <Span>Привет! Спасибо, что отсавил заказ на missyarn.kz!</Span>
-      <Span>Твой заказ:</Span>
-      <Box>
-        {order.orderItems.map((item) => (
-          <Item>
-            <Item>{item.name}</Item>
-            <Item>{item.price * item.qty}</Item>
-            <Item>good</Item>
-          </Item>
-        ))}
-        <Item>
-          <strong>Итого: </strong>
-          {order.itemsPrice}
-        </Item>
-      </Box>
-      <Span>
-        Чтобы получить свой заказ тебе необходимо оплатить его с помощью
-        перевода kaspi по номеру +7(777)777-77-77 или на qiwi кошелек
-      </Span>
-    </Email>
-  )
-}
-
 let transporter = nodemailer.createTransport({
   pool: true,
   host: process.env.HOST_MAIL,
@@ -83,7 +57,29 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
         // plaintext body
         text: "Hello to myself!",
-        html: generateEmail(order),
+        html: renderEmail(
+          <Email title={`Заказ ${createdOrder._id}`}>
+            <Span>Привет! Спасибо, что отсавил заказ на missyarn.kz.</Span>
+            <Span>Твой заказ:</Span>
+            <Box>
+              {createdOrder.orderItems.map((item) => (
+                <Item>
+                  <Item>{item.name}</Item>
+                  <Item>{item.price * item.qty}</Item>
+                  <Item>good</Item>
+                </Item>
+              ))}
+              <Item>
+                <strong>Итого: </strong>
+                {createdOrder.itemsPrice}
+              </Item>
+            </Box>
+            <Span>
+              Чтобы получить свой заказ тебе необходимо оплатить его с помощью
+              перевода kaspi по номеру +7(777)777-77-77 или на qiwi кошелек
+            </Span>
+          </Email>
+        ),
         to: req.user.email,
       }
       transporter.sendMail(message)
