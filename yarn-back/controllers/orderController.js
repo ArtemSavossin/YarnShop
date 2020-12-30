@@ -1,5 +1,26 @@
 import asyncHandler from "express-async-handler"
 import Order from "../models/orderModel.js"
+import nodemailer from "nodemailer"
+import { generateEmail } from "../utils/generateEmail"
+
+let transporter = nodemailer.createTransport({
+  pool: true,
+  host: process.env.HOST_MAIL,
+  port: process.env.PORT_MAIL,
+  secure: false,
+  auth: {
+    user: process.env.MAIL,
+    pass: process.env.PASS,
+  },
+})
+
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log(error)
+  } else {
+    console.log("Server is ready to take our messages")
+  }
+})
 
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
@@ -29,7 +50,20 @@ const addOrderItems = asyncHandler(async (req, res) => {
     })
 
     const createdOrder = await order.save()
+    try {
+      let message = {
+        // Subject of the message
+        subject: "Nodemailer is unicode friendly ✔" + Date.now(),
 
+        // plaintext body
+        text: "Hello to myself!",
+        html: generateEmail(order),
+        to: req.user.email,
+      }
+      transporter.sendMail(message)
+    } catch (e) {
+      console.log("Error in sending message", e.message)
+    }
     res.status(201).json(createdOrder)
   }
 })
