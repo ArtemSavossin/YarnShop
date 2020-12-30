@@ -50,6 +50,29 @@ const addOrderItems = asyncHandler(async (req, res) => {
     })
 
     const createdOrder = await order.save()
+    const mail = renderEmail(
+      <Email title={`Заказ ${createdOrder._id}`}>
+        <Span>Привет! Спасибо, что отсавил заказ на missyarn.kz.</Span>
+        <Span>Твой заказ:</Span>
+        <Box>
+          {createdOrder.orderItems.map((item) => (
+            <Item>
+              <Item>{item.name}</Item>
+              <Item>{item.price * item.qty}</Item>
+              <Item>good</Item>
+            </Item>
+          ))}
+          <Item>
+            <strong>Итого: </strong>
+            {createdOrder.itemsPrice}
+          </Item>
+        </Box>
+        <Span>
+          Чтобы получить свой заказ тебе необходимо оплатить его с помощью
+          перевода kaspi по номеру +7(777)777-77-77 или на qiwi кошелек
+        </Span>
+      </Email>
+    )
     try {
       let message = {
         // Subject of the message
@@ -57,29 +80,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
         // plaintext body
         text: "Hello to myself!",
-        html: renderEmail(
-          <Email title={`Заказ ${createdOrder._id}`}>
-            <Span>Привет! Спасибо, что отсавил заказ на missyarn.kz.</Span>
-            <Span>Твой заказ:</Span>
-            <Box>
-              {createdOrder.orderItems.map((item) => (
-                <Item>
-                  <Item>{item.name}</Item>
-                  <Item>{item.price * item.qty}</Item>
-                  <Item>good</Item>
-                </Item>
-              ))}
-              <Item>
-                <strong>Итого: </strong>
-                {createdOrder.itemsPrice}
-              </Item>
-            </Box>
-            <Span>
-              Чтобы получить свой заказ тебе необходимо оплатить его с помощью
-              перевода kaspi по номеру +7(777)777-77-77 или на qiwi кошелек
-            </Span>
-          </Email>
-        ),
+        html: mail,
         to: req.user.email,
       }
       transporter.sendMail(message)
