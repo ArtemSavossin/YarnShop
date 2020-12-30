@@ -2,7 +2,7 @@ import React from "react"
 import asyncHandler from "express-async-handler"
 import Order from "../models/orderModel.js"
 import nodemailer from "nodemailer"
-import { Email, Item, Span, A, renderEmail, Box } from "react-html-email"
+//import { Email, Item, Span, A, renderEmail, Box } from "react-html-email"
 
 let transporter = nodemailer.createTransport({
   pool: true,
@@ -51,7 +51,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     })
 
     const createdOrder = await order.save()
-    const mail = renderEmail(
+    /*const mail = renderEmail(
       <Email title={`Заказ ${createdOrder._id}`}>
         <Span>Привет! Спасибо, что отсавил заказ на missyarn.kz.</Span>
         <Span>Твой заказ:</Span>
@@ -73,15 +73,14 @@ const addOrderItems = asyncHandler(async (req, res) => {
           перевода kaspi по номеру +7(777)777-77-77 или на qiwi кошелек
         </Span>
       </Email>
-    )
+    )*/
     try {
       let message = {
         // Subject of the message
         subject: "Nodemailer is unicode friendly ✔" + Date.now(),
 
         // plaintext body
-        text: "Hello to myself!",
-        html: mail,
+        text: "Твой заказ собирается, ты можешь оплтатить его переводом kaspi",
         to: req.user.email,
       }
       transporter.sendMail(message)
