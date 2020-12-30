@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler"
 import Order from "../models/orderModel.js"
 import nodemailer from "nodemailer"
 //import { Email, Item, Span, A, renderEmail, Box } from "react-html-email"
-
+/*
 let transporter = nodemailer.createTransport({
   pool: true,
   host: process.env.HOST_MAIL,
@@ -21,7 +21,7 @@ transporter.verify(function (error, success) {
     console.log("Server is ready to take our messages")
   }
 })
-
+*/
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
@@ -72,7 +72,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
           перевода kaspi по номеру +7(777)777-77-77 или на qiwi кошелек
         </Span>
       </Email>
-    )*/
+    )
     try {
       let message = {
         // Subject of the message
@@ -85,7 +85,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       transporter.sendMail(message)
     } catch (e) {
       console.log("Error in sending message", e.message)
-    }
+    }*/
     res.status(201).json(createdOrder)
   }
 })
