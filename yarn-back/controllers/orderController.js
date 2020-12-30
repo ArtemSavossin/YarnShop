@@ -1,4 +1,3 @@
-import React from "react"
 import asyncHandler from "express-async-handler"
 import Order from "../models/orderModel.js"
 import nodemailer from "nodemailer"
