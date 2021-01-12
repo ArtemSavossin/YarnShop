@@ -45,9 +45,12 @@ const Header = () => {
         <LinkContainer
           to="/"
           style={{
+            display: "flex",
+            justifyItems: "flex-bottom",
             margin: "0 15px",
             alignSelf: "center",
             justifySelf: "center",
+            textAlign: "center",
           }}
         >
           <Navbar.Brand>

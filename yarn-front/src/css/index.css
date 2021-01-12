@@ -6,6 +6,8 @@ h1 {
   font-family: "Finger Paint", cursive;
   padding-right: 40px;
   font-weight: 200;
+  font-size: 1.3rem;
+  margin-bottom: -1px;
 }
 @media (min-width: 1024px) {
   h1 {
