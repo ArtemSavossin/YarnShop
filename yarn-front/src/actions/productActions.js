@@ -84,7 +84,7 @@ export const listProductsHooks = (pageNumber = '') => async (dispatch) => {
     dispatch({ type: PRODUCT_LIST_HOOKS_REQUEST });
 
     const { data } = await axios.get(
-      `/api/products?type=hook&pageNumber=${pageNumber}`
+      `/api/products?type=hooks&pageNumber=${pageNumber}`
     );
 
     dispatch({
