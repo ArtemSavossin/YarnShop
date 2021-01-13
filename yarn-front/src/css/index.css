@@ -25,9 +25,11 @@ h1 {
   background-color: #8a2d99 !important;
   color: white;
   border-color: #8a2d99 !important;
+  font-weight: 700;
 }
 .y-primary:hover {
   background-color: #8a2d99 !important;
+  color: white !important;
 }
 .y-primary-border {
   border-color: #8a2d99 !important;

@@ -14,6 +14,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
 import { SearchBox } from './SearchBox';
 import NavButton from './NavButton';
+import { FiBox, FiShoppingCart, FiPhone, FiUser } from 'react-icons/fi';
 import FaIcon from './FaIcon';
 
 const Header = () => {
@@ -96,19 +97,25 @@ const Header = () => {
           <Nav className='ml-3'>
             <LinkContainer to='/orders'>
               <Nav.Link>
-                <NavButton name='Заказы' icon={<FaIcon icon='fa-boxes' />} />
+                <NavButton
+                  name='Заказы'
+                  icon={<FiBox style={{ fontSize: '35px' }} />}
+                />
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to='/cart'>
               <Nav.Link>
-                <NavButton name='Контакты' icon={<FaIcon icon='fa-phone' />} />
+                <NavButton
+                  name='Контакты'
+                  icon={<FiPhone style={{ fontSize: '35px' }} />}
+                />
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to='/cart' className='d-none d-sm-block d-xs-block'>
               <Nav.Link>
                 <NavButton
                   name='Корзина'
-                  icon={<FaIcon icon='fa-shopping-cart' />}
+                  icon={<FiShoppingCart style={{ fontSize: '35px' }} />}
                 />
               </Nav.Link>
             </LinkContainer>
@@ -128,12 +135,15 @@ const Header = () => {
                     </NavDropdown.Item>
                   </NavDropdown>
                 }
-                icon={<FaIcon icon='fa-user' />}
+                icon={<FiUser style={{ fontSize: '35px' }} />}
               />
             ) : (
               <LinkContainer to='/sign-in'>
                 <Nav.Link>
-                  <NavButton name='Аккаунт' icon={<FaIcon icon='fa-user' />} />
+                  <NavButton
+                    name='Аккаунт'
+                    icon={<FiUser style={{ fontSize: '35px' }} />}
+                  />
                 </Nav.Link>
               </LinkContainer>
             )}
@@ -172,9 +182,15 @@ const Header = () => {
         <Col sm={3} xs={2}></Col>
         <Col sm={6} xs={8}>
           <Row style={{ textAlign: 'center', opacity: '80%' }}>
-            <Col xs={4}>Пряжа</Col>
-            <Col xs={4}>Крючки</Col>
-            <Col xs={4}>Наборы</Col>
+            <LinkContainer to='/yarn'>
+              <Col xs={4}>Пряжа</Col>
+            </LinkContainer>
+            <LinkContainer to='/hooks'>
+              <Col xs={4}>Крючки</Col>
+            </LinkContainer>
+            <LinkContainer to='/sets'>
+              <Col xs={4}>Наборы</Col>
+            </LinkContainer>
           </Row>
         </Col>
         <Col sm={3} xs={2}></Col>

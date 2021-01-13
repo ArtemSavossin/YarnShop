@@ -1,22 +1,26 @@
-import React from "react"
-import { Container } from "react-bootstrap"
-import { BrowserRouter as Router, Route } from "react-router-dom"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
-import HomeScreen from "./screens/HomeScreen"
-import ProductScreen from "./screens/ProductScreen"
-import CartScreen from "./screens/CartScreen"
-import LoginScreen from "./screens/LoginScreen"
-import RegisterScreen from "./screens/RegisterScreen"
-import ProfileScreen from "./screens/ProfileScreen"
-import ShippingScreen from "./screens/ShippingScreen"
-import PaymentScreen from "./screens/PaymentScreen"
-import OrderScreen from "./screens/OrderScreen"
-import UserListScreen from "./screens/UserListScreen"
-import UserEditScreen from "./screens/UserEditScreen"
-import ProductListScreen from "./screens/ProductListScreen"
-import ProductEditScreen from "./screens/ProductEditScreen"
-import OrderListScreen from "./screens/OrderListScreen"
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import OrderScreen from './screens/OrderScreen';
+import UserListScreen from './screens/UserListScreen';
+import UserEditScreen from './screens/UserEditScreen';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
+import ProductsSearchScreen from './screens/ProductsSearchScreen';
+import OrderListScreen from './screens/OrderListScreen';
+import YarnScreen from './screens/YarnScreen';
+import HooksScreen from './screens/HooksScreen';
+import SetsScreen from './screens/SetsScreen';
 
 //TODO send notifications on new order
 //TODO back to home screen with pages
@@ -51,19 +55,28 @@ function App() {
           <Route path='/admin/orderlist' component={OrderListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />
           <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
-          <Route path='/search/:keyword' component={HomeScreen} exact />
           <Route
-            path='/search/:keyword/page/:pageNumber'
-            component={HomeScreen}
+            path='/search/:keyword'
+            component={ProductsSearchScreen}
             exact
           />
-          <Route path='/page/:pageNumber' component={HomeScreen} exact />
+          <Route
+            path='/search/:keyword/page/:pageNumber'
+            component={ProductsSearchScreen}
+            exact
+          />
+          <Route path='/yarn' component={YarnScreen} exact />
+          <Route path='/yarn/:pageNumber' component={YarnScreen} exact />
+          <Route path='/hooks' component={HooksScreen} exact />
+          <Route path='/hooks/:pageNumber' component={HooksScreen} exact />
+          <Route path='/sets' component={SetsScreen} exact />
+          <Route path='/sets/:pageNumber' component={SetsScreen} exact />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>
       <Footer />
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
