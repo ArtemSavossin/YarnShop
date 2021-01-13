@@ -1,6 +1,6 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Navbar,
   Nav,
@@ -9,13 +9,15 @@ import {
   Row,
   Col,
   Button,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { logout } from "../actions/userActions";
-import { SearchBox } from "./SearchBox";
-import NavButton from "./NavButton";
+} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { logout } from '../actions/userActions';
+import { SearchBox } from './SearchBox';
+import NavButton from './NavButton';
+import FaIcon from './FaIcon';
 
 const Header = () => {
+  console.log(window.innerWidth);
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -24,33 +26,27 @@ const Header = () => {
   };
   return (
     <header>
-      <Navbar expand="md" className="m-md-3 m-0">
+      <Navbar expand='md' className='m-md-3 m-0 d-flex justify-content-lg-end'>
         <LinkContainer
-          to="/cart"
-          className="d-md-none"
-          style={{ color: "black" }}
+          to='/cart'
+          className='d-md-none justify-conent-end'
+          style={{ color: 'black' }}
         >
-          <Nav.Link>
-            <NavButton
-              name=""
-              icon={
-                <i
-                  className="fas fa-shopping-cart fa-lg"
-                  style={{ paddingRight: "3px" }}
-                ></i>
-              }
-            />
+          <Nav.Link className='d-flex justify-conent-end'>
+            <i
+              className='fas fa-shopping-cart fa-lg'
+              style={{ paddingRight: '3px' }}
+            ></i>
           </Nav.Link>
         </LinkContainer>
         <LinkContainer
-          to="/"
+          to='/'
           style={{
-            display: "flex",
-            justifyItems: "flex-bottom",
-            margin: "0 15px",
-            alignSelf: "center",
-            justifySelf: "center",
-            textAlign: "center",
+            display: 'flex',
+            justifyItems: 'flex-bottom',
+            margin: '0 15px',
+            alignSelf: 'center',
+            textAlign: 'center',
           }}
         >
           <Navbar.Brand>
@@ -59,83 +55,60 @@ const Header = () => {
             </h1>
           </Navbar.Brand>
         </LinkContainer>
-        {window.innerWidth >= 1074 ? (
+        {window.innerWidth >= 1274 ? (
           <Button
             style={{
-              margin: "0 20px",
-              alignSelf: "center",
-              justifySelf: "center",
-              display: "flex",
-              flexDirection: "row",
-              height: "60px",
-              width: "140px",
-              textAlign: "center",
+              margin: '0 20px',
+              alignSelf: 'center',
+              justifySelf: 'center',
+              display: 'flex',
+              flexDirection: 'row',
+              height: '60px',
+              width: '140px',
+              textAlign: 'center',
             }}
-            className="d-none d-lg-block y-primary"
+            className='d-none d-lg-block y-primary'
           >
             <i
-              className="fas fa-bars"
-              style={{ paddingRight: "5px", fontSize: "22px" }}
+              className='fas fa-bars'
+              style={{ paddingRight: '5px', fontSize: '22px' }}
             />
-            <a style={{ fontSize: "22px" }}>Каталог</a>
+            <a style={{ fontSize: '22px' }}>Каталог</a>
           </Button>
         ) : (
           <></>
         )}
+        <div className='d-none d-lg-block'>
+          <Route
+            render={({ history }) => <SearchBox history={history} />}
+            style={{ marginLeft: '20px' }}
+          />
+        </div>
         <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          className="border-0"
-          style={{ color: "black" }}
+          aria-controls='basic-navbar-nav'
+          className='border-0'
+          style={{ color: 'black' }}
         />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <div className="d-none d-sm-block">
-            <Route
-              render={({ history }) => <SearchBox history={history} />}
-              style={{ marginLeft: "20px" }}
-            />
-          </div>
-          <Nav className="ml-3">
-            {/*<LinkContainer to="/cart">
+        <Navbar.Collapse
+          id='basic-navbar-nav'
+          className='align-self-end justify-content-end'
+        >
+          <Nav className='ml-3'>
+            <LinkContainer to='/orders'>
               <Nav.Link>
-                <NavButton
-                  name="Заказы"
-                  icon={
-                    <i
-                      className="fas fa-boxes fa-2x"
-                      style={{ paddingRight: "3px" }}
-                    ></i>
-                  }
-                />
+                <NavButton name='Заказы' icon={<FaIcon icon='fa-boxes' />} />
               </Nav.Link>
             </LinkContainer>
-                */}
-            <LinkContainer to="/cart">
+            <LinkContainer to='/cart'>
               <Nav.Link>
-                <NavButton
-                  name="Контакты"
-                  icon={
-                    <i
-                      className={`fas fa-phone fa-${
-                        window.innerWidth >= 600 ? "lg" : "2x"
-                      }`}
-                      style={{ paddingRight: "3px" }}
-                    ></i>
-                  }
-                />
+                <NavButton name='Контакты' icon={<FaIcon icon='fa-phone' />} />
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/cart" className="d-none d-sm-block d-xs-block">
+            <LinkContainer to='/cart' className='d-none d-sm-block d-xs-block'>
               <Nav.Link>
                 <NavButton
-                  name="Корзина"
-                  icon={
-                    <i
-                      className={`fas fa-shopping-cart fa-${
-                        window.innerWidth >= 600 ? "lg" : "2x"
-                      }`}
-                      style={{ paddingRight: "3px" }}
-                    ></i>
-                  }
+                  name='Корзина'
+                  icon={<FaIcon icon='fa-shopping-cart' />}
                 />
               </Nav.Link>
             </LinkContainer>
@@ -143,11 +116,11 @@ const Header = () => {
               <NavButton
                 name={
                   <NavDropdown
-                    title="Профиль"
-                    id="username"
-                    style={{ paddingTop: "0px !important" }}
+                    title='Профиль'
+                    id='username'
+                    style={{ paddingTop: '0px !important' }}
                   >
-                    <LinkContainer to="/profile">
+                    <LinkContainer to='/profile'>
                       <NavDropdown.Item>Личный кабинет</NavDropdown.Item>
                     </LinkContainer>
                     <NavDropdown.Item onClick={logoutHandler}>
@@ -155,53 +128,31 @@ const Header = () => {
                     </NavDropdown.Item>
                   </NavDropdown>
                 }
-                icon={
-                  <i
-                    className={`fas fa-user fa-${
-                      window.innerWidth >= 600 ? "lg" : "2x"
-                    }`}
-                    style={{ paddingRight: "3px" }}
-                  ></i>
-                }
+                icon={<FaIcon icon='fa-user' />}
               />
             ) : (
-              <LinkContainer to="/sign-in">
+              <LinkContainer to='/sign-in'>
                 <Nav.Link>
-                  <NavButton
-                    name="Аккаунт"
-                    icon={
-                      <i
-                        className={`fas fa-user fa-${
-                          window.innerWidth >= 600 ? "lg" : "2x"
-                        }`}
-                        style={{ paddingRight: "3px" }}
-                      ></i>
-                    }
-                  />
+                  <NavButton name='Аккаунт' icon={<FaIcon icon='fa-user' />} />
                 </Nav.Link>
               </LinkContainer>
             )}
             {userInfo && userInfo.isAdmin ? (
               <NavButton
                 name={
-                  <NavDropdown title="Администрирование" id="admin">
-                    <LinkContainer to="/admin/userlist">
+                  <NavDropdown title='Администрирование' id='admin'>
+                    <LinkContainer to='/admin/userlist'>
                       <NavDropdown.Item>Пользователи</NavDropdown.Item>
                     </LinkContainer>
-                    <LinkContainer to="/admin/orderlist">
+                    <LinkContainer to='/admin/orderlist'>
                       <NavDropdown.Item>Заказы</NavDropdown.Item>
                     </LinkContainer>
-                    <LinkContainer to="/admin/productlist">
+                    <LinkContainer to='/admin/productlist'>
                       <NavDropdown.Item>Товары</NavDropdown.Item>
                     </LinkContainer>
                   </NavDropdown>
                 }
-                icon={
-                  <i
-                    className="fas fa-user-shield"
-                    style={{ paddingRight: "3px" }}
-                  ></i>
-                }
+                icon={<FaIcon icon='fa-user-shield' />}
               />
             ) : (
               <></>
@@ -209,16 +160,18 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <div className="d-sm-none ml-3 mr-3 mb-4">
-        <Route
-          render={({ history }) => <SearchBox history={history} />}
-          style={{ marginLeft: "20px" }}
-        />
-      </div>
+      <Row className='d-lg-none ml-3 mr-3 mb-4'>
+        <Col xs={12}>
+          <Route
+            render={({ history }) => <SearchBox history={history} />}
+            style={{ marginLeft: '20px' }}
+          />
+        </Col>
+      </Row>
       <Row>
         <Col sm={3} xs={2}></Col>
         <Col sm={6} xs={8}>
-          <Row style={{ textAlign: "center", opacity: "80%" }}>
+          <Row style={{ textAlign: 'center', opacity: '80%' }}>
             <Col xs={4}>Пряжа</Col>
             <Col xs={4}>Крючки</Col>
             <Col xs={4}>Наборы</Col>

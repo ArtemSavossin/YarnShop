@@ -1,17 +1,20 @@
+:root {
+  --primary: #8a2d99;
+}
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 h1 {
-  font-family: "Finger Paint", cursive;
-  padding-right: 40px;
+  font-family: 'Finger Paint', cursive;
   font-weight: 200;
-  font-size: 1.3rem;
+  font-size: 7vw;
   margin-bottom: -1px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 1084px) {
   h1 {
     font-size: 4rem;
+    padding-right: 40px;
   }
 }
 
