@@ -59,16 +59,22 @@ main {
 }
 
 .carousel img {
-  height: 300px;
-  padding: 30px;
-  margin: 40px;
   align-self: center;
   margin-left: auto;
+  height: 100%;
   margin-right: auto;
 }
 .carousel a {
   margin: 0 auto;
 }
+
+.carousel li {
+  background-color: #8a2d99;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+}
+
 @media (max-width: 900px) {
   .carousel-caption h2 {
     font-size: 2.5vw;

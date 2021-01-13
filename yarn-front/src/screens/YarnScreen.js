@@ -46,7 +46,7 @@ const YarnScreen = ({ match }) => {
                 </Col>
               ))}
           </Row>
-          <Paginate page={page} pages={pages} keyword={''} />
+          <Paginate page={page} pages={pages} keyword={''} type='yarn' />
         </>
       )}
     </>

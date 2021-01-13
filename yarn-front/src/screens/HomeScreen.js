@@ -12,17 +12,11 @@ import Meta from '../components/Meta';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
-  console.log(match.params.type);
   const pageNumber = match.params.pageNumber || 1;
 
   const dispatch = useDispatch();
-
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
-
-  useEffect(() => {
-    dispatch(listProducts(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
+  const error = false;
+  const loading = false;
   return (
     <>
       <Meta title={'Miss Yarn'} />

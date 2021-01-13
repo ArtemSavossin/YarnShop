@@ -33,7 +33,6 @@ import {
 } from './reducers/orderReducers';
 
 const reducer = combineReducers({
-  productList: productListReducer,
   productListYarn: productListYarnReducer,
   productListSets: productListSetsReducer,
   productListHooks: productListHooksReducer,

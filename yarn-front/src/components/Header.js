@@ -56,7 +56,7 @@ const Header = () => {
             </h1>
           </Navbar.Brand>
         </LinkContainer>
-        {window.innerWidth >= 1274 ? (
+        {window.innerWidth >= 1300 ? (
           <Button
             style={{
               margin: '0 20px',

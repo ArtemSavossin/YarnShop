@@ -16,7 +16,7 @@ const getProducts = asyncHandler(async (req, res) => {
     : {};
   let count = 0;
   let products = [];
-  if (keyword) {
+  if (req.query.keyword) {
     count = await Product.countDocuments({ ...keyword });
     products = await Product.find({ ...keyword })
       .limit(pageSize)

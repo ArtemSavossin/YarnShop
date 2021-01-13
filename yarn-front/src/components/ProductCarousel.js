@@ -25,10 +25,29 @@ const ProductCarousel = () => {
       <Carousel pause='hover' className='bg-light'>
         {products &&
           products.map((product) => (
-            <Carousel.Item key={product._id}>
+            <Carousel.Item
+              key={product._id}
+              style={{
+                height: `${
+                  window.innerWidth <= 768
+                    ? '35vw'
+                    : window.innerWidth <= 1200
+                    ? '20vw'
+                    : '250px'
+                }`,
+              }}
+            >
               <Link to={`/product/${product._id}`}>
-                <Image src={product.image} alt={product.name} fluid />
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fluid
+                  className='d-block w-100 p-0 m-0'
+                />
               </Link>
+              <Carousel.Caption>
+                <h3>{product.name}</h3>
+              </Carousel.Caption>
             </Carousel.Item>
           ))}
       </Carousel>
