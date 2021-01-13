@@ -30,7 +30,7 @@ const Header = () => {
         <LinkContainer
           to='/cart'
           className='d-md-none justify-conent-end'
-          style={{ color: 'black' }}
+          style={{ color: 'black', opacity: '80%' }}
         >
           <Nav.Link className='d-flex justify-conent-end'>
             <i
@@ -78,7 +78,7 @@ const Header = () => {
         ) : (
           <></>
         )}
-        <div className='d-none d-lg-block'>
+        <div className='d-none d-lg-block flex-grow-1'>
           <Route
             render={({ history }) => <SearchBox history={history} />}
             style={{ marginLeft: '20px' }}
@@ -91,7 +91,7 @@ const Header = () => {
         />
         <Navbar.Collapse
           id='basic-navbar-nav'
-          className='align-self-end justify-content-end'
+          className='align-self-end justify-content-around'
         >
           <Nav className='ml-3'>
             <LinkContainer to='/orders'>
