@@ -42,7 +42,7 @@ export const YarnShowcase = () => {
           <Loader />
         ) : (
           <tr>
-            {yarn.slice(0, 5).map((y) => (
+            {yarn.slice(0, 6).map((y) => (
               <td>
                 <ProductSM product={y} table />
               </td>
