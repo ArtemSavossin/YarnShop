@@ -131,12 +131,12 @@ const ProfileScreen = ({ history, location }) => {
           >
             <thead>
               <tr>
-                <th>ID</th>
+                <th></th>
                 <th>Дата</th>
                 <th>Сумма</th>
                 <th>Оплачено</th>
                 <th>Доставлено</th>
-                <th></th>
+                <th>ID</th>
               </tr>
             </thead>
             <tbody>
@@ -147,11 +147,6 @@ const ProfileScreen = ({ history, location }) => {
                 );
                 return (
                   <tr key={order._id}>
-                    <td>{order._id}</td>
-                    <td>{order.createdAt.substring(0, 10)}</td>
-                    <td>{order.itemsPrice}</td>
-                    <td>{order.isPaid ? '✅' : '❌'}</td>
-                    <td>{order.isFinished ? '✅' : '❌'}</td>
                     <td>
                       <LinkContainer to={`/orders/${order._id}`}>
                         <Button className='btn-sm' variant='light'>
@@ -159,6 +154,11 @@ const ProfileScreen = ({ history, location }) => {
                         </Button>
                       </LinkContainer>
                     </td>
+                    <td>{order.createdAt.substring(0, 10)}</td>
+                    <td>{order.itemsPrice}</td>
+                    <td>{order.isPaid ? '✅' : '❌'}</td>
+                    <td>{order.isFinished ? '✅' : '❌'}</td>
+                    <td>{order._id}</td>
                   </tr>
                 );
               })}

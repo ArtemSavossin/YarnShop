@@ -14,14 +14,23 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
 import { SearchBox } from './SearchBox';
 import NavButton from './NavButton';
-import { FiBox, FiShoppingCart, FiPhone, FiUser } from 'react-icons/fi';
+import {
+  FiBox,
+  FiShoppingCart,
+  FiPhone,
+  FiUser,
+  FiPackage,
+} from 'react-icons/fi';
 import FaIcon from './FaIcon';
 
 const Header = () => {
-  console.log(window.innerWidth);
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -34,10 +43,16 @@ const Header = () => {
           style={{ color: 'black', opacity: '80%' }}
         >
           <Nav.Link className='d-flex justify-conent-end'>
-            <i
-              className='fas fa-shopping-cart fa-lg'
-              style={{ paddingRight: '3px' }}
-            ></i>
+            <>
+              <FiShoppingCart
+                style={{ paddingRight: '3px', fontSize: '28px' }}
+              ></FiShoppingCart>
+              {cartItems.length ? (
+                <span className='cart-active-small'>*</span>
+              ) : (
+                <></>
+              )}
+            </>
           </Nav.Link>
         </LinkContainer>
         <LinkContainer
@@ -103,7 +118,7 @@ const Header = () => {
                 />
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/cart'>
+            <LinkContainer to='/contacts'>
               <Nav.Link>
                 <NavButton
                   name='Контакты'
@@ -115,7 +130,16 @@ const Header = () => {
               <Nav.Link>
                 <NavButton
                   name='Корзина'
-                  icon={<FiShoppingCart style={{ fontSize: '35px' }} />}
+                  icon={
+                    <>
+                      <FiShoppingCart style={{ fontSize: '35px' }} />
+                      {cartItems.length ? (
+                        <span className='cart-active'>*</span>
+                      ) : (
+                        <></>
+                      )}
+                    </>
+                  }
                 />
               </Nav.Link>
             </LinkContainer>

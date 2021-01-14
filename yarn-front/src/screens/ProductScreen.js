@@ -9,7 +9,9 @@ import {
   Card,
   Button,
   Form,
+  Toast,
 } from 'react-bootstrap';
+import { addToCart } from '../actions/cartActions';
 
 import { listProductsDetails } from '../actions/productActions';
 import Loader from '../components/Loader';
@@ -17,25 +19,33 @@ import Message from '../components/Message';
 import Meta from '../components/Meta';
 
 const ProductScreen = ({ history, match }) => {
+  const dispatch = useDispatch();
+
   const [qty, setQty] = useState(1);
   const [from, setFrom] = useState('/');
   const [page, setPage] = useState('/');
+  const [showAdded, setShowAdded] = useState(false);
   const id = match.params.id;
-  const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
   const { loading, error, product } = productDetail;
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     dispatch(listProductsDetails(match.params.id));
-  }, [dispatch, match]);
+  }, [dispatch, match, sending]);
 
   useEffect(() => {
     setFrom(match.params.from);
     setPage(match.params.page);
   }, [match]);
 
-  const addToCartHandler = (match) => {
-    history.push(`/cart/${id}?qty=${qty}`);
+  const addToCartHandler = () => {
+    setShowAdded(true);
+    setTimeout(() => setShowAdded(false), 5000);
+    setSending(true);
+    if (id) {
+      dispatch(addToCart(id, 1));
+    }
   };
   return (
     <>
@@ -52,14 +62,14 @@ const ProductScreen = ({ history, match }) => {
         <Message variant='danger' children={error} />
       ) : (
         <Row>
-          <Col sm={12} md={6} style={{ width: '100%' }} lg={4}>
+          <Col sm={12} md={6} lg={4} style={{ width: '100%' }} className='mb-5'>
             <Image
               src={product.image}
               alt={product.name}
-              style={{ height: 'auto', width: 'auto' }}
+              style={{ height: 'auto%', width: '100%' }}
             />
           </Col>
-          <Col sm={12} md={6} lg={4}>
+          <Col sm={12} md={6} lg={4} className='mb-5'>
             <Card
               className='shadow-lg rounded-lg p-4 d-flex'
               border='light'
@@ -69,8 +79,14 @@ const ProductScreen = ({ history, match }) => {
                 <strong>{product.price}〒</strong>
               </Card.Title>
               <Card.Text className='my-auto pl-2'>
-                <div className='mb-2'>Доставка ✅</div>
-                <div>Самовывоз ✅</div>
+                <ul>
+                  <li>
+                    <div className='mb-2'>✅ Доставка</div>
+                  </li>
+                  <li>
+                    <div>✅ Самовывоз</div>
+                  </li>
+                </ul>
               </Card.Text>
               {/*product.countInStock ? (
                 <Row>
@@ -103,6 +119,17 @@ const ProductScreen = ({ history, match }) => {
             </Card>
           </Col>
           <Col sm={12} lg={4}>
+            <Toast show={showAdded} style={{ display: 'float' }}>
+              <Toast.Header>
+                <strong className='mr-auto'>
+                  Вы добавили товар в корзину!
+                </strong>
+              </Toast.Header>
+              <Toast.Body>
+                Перейдите в корзину, чтобы выбрать количества товара и оформить
+                заявку
+              </Toast.Body>
+            </Toast>
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h4>О товаре</h4>

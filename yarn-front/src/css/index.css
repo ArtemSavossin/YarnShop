@@ -24,10 +24,25 @@ ul {
 }
 li {
   margin: 20px 0;
+  font-size: large;
 }
 
 .form-inline .form-control {
   flex-grow: 1;
+}
+.cart-active {
+  color: darkorange;
+  font-size: 30px;
+  float: right;
+  margin-top: -15px;
+  margin-right: -10px;
+}
+.cart-active-small {
+  color: darkorange;
+  font-size: 20px;
+  float: right;
+  margin-top: -8px;
+  margin-right: -9px;
 }
 .y-primary {
   background-color: var(--primary) !important;

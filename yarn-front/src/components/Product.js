@@ -1,9 +1,23 @@
-import React from 'react';
-import { Button, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Card, OverlayTrigger, Popover } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../actions/cartActions';
 import Rating from '../components/Rating';
 
+const popover = (
+  <Popover id='popover-basic'>
+    <Popover.Title as='h3'>Вы добавили товар в корзину!</Popover.Title>
+    <Popover.Content>
+      Перейдите в корзину, чтобы выбрать количества товара и оформить заявку
+    </Popover.Content>
+  </Popover>
+);
+
 const Product = ({ product, notYarn }) => {
+  const dispatch = useDispatch();
+  const [showAdded, setShowAdded] = useState(false);
+
   const pathname = window.location.pathname;
   return (
     <>
@@ -29,9 +43,26 @@ const Product = ({ product, notYarn }) => {
               <></>
             )}
             <Card.Text as='div'>{product.name}</Card.Text>
-            <Button className='y-primary' size='sm' type='button'>
-              В корзину
-            </Button>
+            <OverlayTrigger
+              trigger='click'
+              placement='right'
+              overlay={popover}
+              show={showAdded}
+            >
+              <Button
+                className='y-primary'
+                size='sm'
+                type='button'
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(addToCart(product._id, 1));
+                  setShowAdded(true);
+                  setTimeout(() => setShowAdded(false), 3000);
+                }}
+              >
+                В корзину
+              </Button>
+            </OverlayTrigger>
           </Card.Body>
         </Card>
       </Link>

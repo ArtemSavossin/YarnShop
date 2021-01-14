@@ -42,7 +42,7 @@ function App() {
             exact
           />
           <Route path='/product/:id/:from' component={ProductScreen} exact />
-          <Route path='/product/:id' component={ProductScreen} />
+          <Route path='/product/:id' component={ProductScreen} exact />
           <Route path='/orders/:id' component={OrderScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
           <Route path='/shipping' component={ShippingScreen} />

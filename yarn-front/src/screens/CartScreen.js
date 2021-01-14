@@ -1,32 +1,40 @@
-import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { Row, Col, ListGroup, Image, Form, Button, Card } from "react-bootstrap"
-import Message from "../components/Message"
-import { addToCart, removeFromCart } from "../actions/cartActions"
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Form,
+  Button,
+  Card,
+} from 'react-bootstrap';
+import Message from '../components/Message';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = ({ history, match, location }) => {
-  const productId = match.params.id
-  console.log(match.params)
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1
+  const productId = match.params.id;
+  console.log(match.params);
+  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty))
+      dispatch(addToCart(productId, qty));
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
-  }
+    dispatch(removeFromCart(id));
+  };
   const checkoutHandler = () => {
-    history.push(`/sign-in?redirect=shipping`)
-  }
+    history.push(`/sign-in?redirect=shipping`);
+  };
   return (
     <Row>
       <Col sm={8}>
@@ -36,19 +44,26 @@ const CartScreen = ({ history, match, location }) => {
         ) : (
           <ListGroup variant='flush'>
             {cartItems.map((item) => {
-              console.log(item)
+              console.log(item);
               return (
                 <ListGroup.Item key={item.product}>
                   <Row>
                     <Col xs={6} sm={2}>
                       <Image src={item.image} rounded fluid />
                     </Col>
-                    <Col xs={2} sm={3}>
-                      <Link to={`/product/${item.product}`}>
-                        {item.name || "Пряжа"}
+                    <Col xs={6} sm={3} style={{ verticalAlign: 'middle' }}>
+                      <Link
+                        to={`/product/${item.product}`}
+                        style={{ color: 'black' }}
+                      >
+                        {item.name || 'Пряжа'}
                       </Link>
                     </Col>
-                    <Col xs={4} sm={2}>
+                    <Col
+                      xs={4}
+                      sm={2}
+                      style={{ textAlign: 'center', verticalAlign: 'middle' }}
+                    >
                       {item.price * item.qty || 1800 * item.qty}〒
                     </Col>
                     <Col xs={6} sm={3}>
@@ -73,7 +88,7 @@ const CartScreen = ({ history, match, location }) => {
                         type='button'
                         variant='light'
                         onClick={() => {
-                          removeFromCartHandler(item.product)
+                          removeFromCartHandler(item.product);
                         }}
                       >
                         <i className='fas fa-trash'></i>
@@ -81,7 +96,7 @@ const CartScreen = ({ history, match, location }) => {
                     </Col>
                   </Row>
                 </ListGroup.Item>
-              )
+              );
             })}
           </ListGroup>
         )}
@@ -91,7 +106,7 @@ const CartScreen = ({ history, match, location }) => {
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>
-                Итого:{" "}
+                Итого:{' '}
                 {cartItems.reduce(
                   (acc, item) => acc + item.qty * item.price,
                   0
@@ -102,7 +117,7 @@ const CartScreen = ({ history, match, location }) => {
             <ListGroup.Item>
               <Button
                 type='button'
-                className='btn-block'
+                className='btn-block y-primary'
                 disabled={cartItems.lendth === 0}
                 onClick={checkoutHandler}
               >
@@ -113,6 +128,6 @@ const CartScreen = ({ history, match, location }) => {
         </Card>
       </Col>
     </Row>
-  )
-}
-export default CartScreen
+  );
+};
+export default CartScreen;

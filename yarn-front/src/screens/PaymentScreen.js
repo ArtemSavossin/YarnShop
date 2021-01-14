@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from 'react';
 import {
   ListGroup,
   Image,
@@ -7,37 +7,37 @@ import {
   Row,
   Col,
   Card,
-} from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { saveShippingAddress } from "../actions/cartActions"
-import { createOrder } from "../actions/orderActions"
-import Message from "../components/Message"
-import CheckoutSteps from "../components/CheckoutSteps"
+} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveShippingAddress } from '../actions/cartActions';
+import { createOrder } from '../actions/orderActions';
+import Message from '../components/Message';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 const PaymentScreen = ({ history }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart)
-  const { shippingAddress } = cart
+  const cart = useSelector((state) => state.cart);
+  const { shippingAddress } = cart;
 
   cart.itemsPrice = cart.cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
-  )
+  );
   if (!shippingAddress) {
-    history.push("/shipping")
+    history.push('/shipping');
   }
-  const orderCreate = useSelector((state) => state.orderCreate)
+  const orderCreate = useSelector((state) => state.orderCreate);
 
-  const { order, success, error } = orderCreate
+  const { order, success, error } = orderCreate;
 
   useEffect(() => {
     if (success) {
-      history.push(`/orders/${order._id}`)
+      history.push(`/orders/${order._id}`);
     }
     // eslint-disable-next-line
-  }, [success, history])
+  }, [success, history]);
   const placeOrderHandler = () => {
     dispatch(
       createOrder({
@@ -45,8 +45,8 @@ const PaymentScreen = ({ history }) => {
         shippingAddress: cart.shippingAddress,
         itemsPrice: cart.itemsPrice,
       })
-    )
-  }
+    );
+  };
   return (
     <Container>
       <CheckoutSteps step1 step2 step3 />
@@ -58,7 +58,7 @@ const PaymentScreen = ({ history }) => {
               <h3>Доставка</h3>
               <p>
                 <strong>Адрес : </strong>
-                {cart.shippingAddress.city}, {cart.shippingAddress.address},{" "}
+                {cart.shippingAddress.city}, {cart.shippingAddress.address},{' '}
                 {cart.shippingAddress.zipCode}
               </p>
             </ListGroup.Item>
@@ -81,7 +81,10 @@ const PaymentScreen = ({ history }) => {
                             />
                           </Col>
                           <Col xs={4}>
-                            <Link to={`/product/${item.product}`}>
+                            <Link
+                              to={`/product/${item.product}`}
+                              style={{ color: 'black' }}
+                            >
                               {item.name}
                             </Link>
                           </Col>
@@ -91,14 +94,12 @@ const PaymentScreen = ({ history }) => {
                           </Col>
                         </Row>
                       </ListGroup.Item>
-                    )
+                    );
                   })}
                   <ListGroup.Item>
                     <Row>
-                      <Col xs={2}>
-                        <strong>Итого: </strong>
-                      </Col>
-                      <Col xs={10}>{cart.itemsPrice}〒</Col>
+                      <strong>Итого: </strong>
+                      {cart.itemsPrice}〒
                     </Row>
                   </ListGroup.Item>
                 </ListGroup>
@@ -113,14 +114,14 @@ const PaymentScreen = ({ history }) => {
 
       <Button
         type='button'
-        className='mt-3'
+        className='mt-3 y-primary'
         disabled={cart.cartItems === 0}
         onClick={placeOrderHandler}
       >
         Подвтердить заказ
       </Button>
     </Container>
-  )
-}
+  );
+};
 
-export default PaymentScreen
+export default PaymentScreen;
