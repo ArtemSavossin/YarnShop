@@ -1,62 +1,62 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { Container, Form, Button, Row, Col, Table } from "react-bootstrap"
-import { LinkContainer } from "react-router-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Container, Form, Button, Row, Col, Table } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
 //import FormContainer from '../components/FormContainer.js'
-import { getUserDetails, updateUserProfile } from "../actions/userActions"
-import { listMyOrders } from "../actions/orderActions"
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
+import { listMyOrders } from '../actions/orderActions';
 import {
   USER_UPDATE_PROFILE_RESET,
   USER_UPDATE_PROFILE_SUCCESS,
-} from "../constants/userConstants"
+} from '../constants/userConstants';
 
 const ProfileScreen = ({ history, location }) => {
-  const [email, setEmail] = useState("")
-  const [name, setName] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [message, setMessage] = useState(null)
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState(null);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
-  const { success } = userUpdateProfile
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
 
-  const userDetails = useSelector((state) => state.userDetails)
-  const { loading, error, user } = userDetails
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user } = userDetails;
 
-  const orderListMy = useSelector((state) => state.orderListMy)
-  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
+  const orderListMy = useSelector((state) => state.orderListMy);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/sign-in")
+      history.push('/sign-in');
     } else {
       if (!user || !user.name || success) {
-        dispatch({ type: USER_UPDATE_PROFILE_RESET })
-        dispatch(getUserDetails("profile"))
-        dispatch(listMyOrders())
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
+        dispatch(getUserDetails('profile'));
+        dispatch(listMyOrders());
       } else {
-        setName(user.name)
-        setEmail(user.email)
+        setName(user.name);
+        setEmail(user.email);
       }
     }
-  }, [history, userInfo, dispatch, user, success])
+  }, [history, userInfo, dispatch, user, success]);
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("Пароли не совпадают")
+      setMessage('Пароли не совпадают');
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }))
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
-  }
+  };
   return (
     <Row>
       <Col md={3}>
@@ -107,7 +107,7 @@ const ProfileScreen = ({ history, location }) => {
                 ></Form.Control>
               </Form.Group>
 
-              <Button type='submit' variant='primary'>
+              <Button type='submit' className='y-primary'>
                 Обновить
               </Button>
             </Form>
@@ -121,7 +121,14 @@ const ProfileScreen = ({ history, location }) => {
         ) : errorOrders ? (
           <Message variant='danger'>{errorOrders}</Message>
         ) : (
-          <Table striped bordered hober responsive className='table-sm'>
+          <Table
+            striped
+            bordered
+            hover
+            responsive
+            className='table-sm'
+            size='sm'
+          >
             <thead>
               <tr>
                 <th>ID</th>
@@ -137,14 +144,14 @@ const ProfileScreen = ({ history, location }) => {
                 order.itemsPrice = order.orderItems.reduce(
                   (acc, item) => acc + item.price * item.qty,
                   0
-                )
+                );
                 return (
                   <tr key={order._id}>
                     <td>{order._id}</td>
                     <td>{order.createdAt.substring(0, 10)}</td>
                     <td>{order.itemsPrice}</td>
-                    <td>{order.isPaid ? "✅" : "❌"}</td>
-                    <td>{order.isFinished ? "✅" : "❌"}</td>
+                    <td>{order.isPaid ? '✅' : '❌'}</td>
+                    <td>{order.isFinished ? '✅' : '❌'}</td>
                     <td>
                       <LinkContainer to={`/orders/${order._id}`}>
                         <Button className='btn-sm' variant='light'>
@@ -153,13 +160,13 @@ const ProfileScreen = ({ history, location }) => {
                       </LinkContainer>
                     </td>
                   </tr>
-                )
+                );
               })}
             </tbody>
           </Table>
         )}
       </Col>
     </Row>
-  )
-}
-export default ProfileScreen
+  );
+};
+export default ProfileScreen;

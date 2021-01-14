@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { Container, Form, Button, Row, Col } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
 //import FormContainer from '../components/FormContainer.js'
-import { login } from "../actions/userActions"
+import { login } from '../actions/userActions';
 
 const LoginScreen = ({ history, location }) => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const redirect = location.search ? location.search.split("=")[1] : "/"
+  const redirect = location.search ? location.search.split('=')[1] : '/';
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect)
+      history.push(redirect);
     }
-  }, [history, userInfo, redirect])
+  }, [history, userInfo, redirect]);
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    dispatch(login(email, password))
-  }
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
   return (
     //swipe to formContainer from FormContainerJS
     <Container>
@@ -58,15 +58,15 @@ const LoginScreen = ({ history, location }) => {
               ></Form.Control>
             </Form.Group>
 
-            <Button type='submit' variant='primary'>
+            <Button type='submit' className='y-primary'>
               Войти
             </Button>
           </Form>
           <Row className='py-3'>
             <Col>
-              Новый пользователь?{" "}
+              Новый пользователь?{' '}
               <Link
-                to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                to={redirect ? `/register?redirect=${redirect}` : '/register'}
               >
                 Регистрируйся!
               </Link>
@@ -75,6 +75,6 @@ const LoginScreen = ({ history, location }) => {
         </>
       )}
     </Container>
-  )
-}
-export default LoginScreen
+  );
+};
+export default LoginScreen;

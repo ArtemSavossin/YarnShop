@@ -1,20 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
-import Product from '../components/Product';
-import { listProducts } from '../actions/productActions';
 import Loader from '../components/Loader';
-import Paginate from '../components/Paginate';
 import Message from '../components/Message';
 import ProductCarousel from '../components/ProductCarousel';
 import Meta from '../components/Meta';
+import {
+  HooksShowcase,
+  YarnShowcase,
+  SetsShowcase,
+} from '../components/Showcase';
+import { listProducts } from '../actions/productActions';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
   const pageNumber = match.params.pageNumber || 1;
 
   const dispatch = useDispatch();
+
   const error = false;
   const loading = false;
   return (
@@ -39,9 +42,9 @@ const HomeScreen = ({ match }) => {
         <Message variant='danger' children={error} />
       ) : (
         <>
-          <h3>Пряжа</h3>
-          <h3>Крючки</h3>
-          <h3>Наборы</h3>
+          <YarnShowcase />
+          <HooksShowcase />
+          <SetsShowcase />
         </>
       )}
     </>
