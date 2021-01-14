@@ -1,30 +1,50 @@
-import React, { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Card,
+  Button,
+  Form,
+} from 'react-bootstrap';
 
-import { listProductsDetails } from "../actions/productActions"
-import Loader from "../components/Loader"
-import Message from "../components/Message"
-import Meta from "../components/Meta"
+import { listProductsDetails } from '../actions/productActions';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+import Meta from '../components/Meta';
 
 const ProductScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(1)
-  const id = match.params.id
-  const dispatch = useDispatch()
-  const productDetail = useSelector((state) => state.productDetail)
-  const { loading, error, product } = productDetail
+  const [qty, setQty] = useState(1);
+  const [from, setFrom] = useState('/');
+  const [page, setPage] = useState('/');
+  const id = match.params.id;
+  const dispatch = useDispatch();
+  const productDetail = useSelector((state) => state.productDetail);
+  const { loading, error, product } = productDetail;
+
   useEffect(() => {
-    dispatch(listProductsDetails(match.params.id))
-  }, [dispatch, match])
+    dispatch(listProductsDetails(match.params.id));
+  }, [dispatch, match]);
+
+  useEffect(() => {
+    setFrom(match.params.from);
+    setPage(match.params.page);
+  }, [match]);
+
   const addToCartHandler = (match) => {
-    history.push(`/cart/${id}?qty=${qty}`)
-  }
+    history.push(`/cart/${id}?qty=${qty}`);
+  };
   return (
     <>
       <Meta title={`${product.name}`} />
-      <Link className='btn btn-dark my-3' to='/'>
-        К пряже
+      <Link
+        className='btn btn-dark my-3'
+        to={`/${from ? (page ? `${from}/${page}` : from) : ''}`}
+      >
+        Назад
       </Link>
       {loading ? (
         <Loader />
@@ -36,7 +56,7 @@ const ProductScreen = ({ history, match }) => {
             <Image
               src={product.image}
               alt={product.name}
-              style={{ maxHeight: "60vh", maxWidth: "90vw" }}
+              style={{ maxHeight: '60vh', maxWidth: '90vw' }}
             />
           </Col>
           <Col sm={6} md={4}>
@@ -46,13 +66,13 @@ const ProductScreen = ({ history, match }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 {product.description &&
-                  product.description.split("\n").map((item, key) => {
+                  product.description.split('\n').map((item, key) => {
                     return (
                       <span key={key}>
                         {item}
                         <br />
                       </span>
-                    )
+                    );
                   })}
               </ListGroup.Item>
               <ListGroup.Item>Цена: {product.price}〒</ListGroup.Item>
@@ -86,12 +106,12 @@ const ProductScreen = ({ history, match }) => {
                       </Col>
                     </Row>
                   ) : (
-                    "Нет на складе"
+                    'Нет на складе'
                   )}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
-                    className='btn-block'
+                    className='btn-block y-primary y-primary-border'
                     type='button'
                     disabled={!product.countInStock}
                     onClick={addToCartHandler}
@@ -105,7 +125,7 @@ const ProductScreen = ({ history, match }) => {
         </Row>
       )}
     </>
-  )
-}
+  );
+};
 
-export default ProductScreen
+export default ProductScreen;

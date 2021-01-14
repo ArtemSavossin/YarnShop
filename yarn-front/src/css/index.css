@@ -8,7 +8,7 @@ body {
 h1 {
   font-family: 'Finger Paint', cursive;
   font-weight: 200;
-  font-size: 7vw;
+  font-size: 9vw;
   margin-bottom: -1px;
 }
 @media (min-width: 1084px) {
@@ -22,17 +22,17 @@ h1 {
   flex-grow: 1;
 }
 .y-primary {
-  background-color: #8a2d99 !important;
+  background-color: var(--primary) !important;
   color: white;
-  border-color: #8a2d99 !important;
+  border-color: var(--primary) !important;
   font-weight: 700;
 }
 .y-primary:hover {
-  background-color: #8a2d99 !important;
+  background-color: var(--primary) !important;
   color: white !important;
 }
 .y-primary-border {
-  border-color: #8a2d99 !important;
+  border-color: var(--primary) !important;
   border-width: 3px !important;
 }
 
@@ -69,10 +69,15 @@ main {
 }
 
 .carousel li {
-  background-color: #8a2d99;
+  background-color: var(--primary);
   border-radius: 50%;
   height: 10px;
   width: 10px;
+}
+
+.page-item.active .page-link {
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
 @media (max-width: 900px) {

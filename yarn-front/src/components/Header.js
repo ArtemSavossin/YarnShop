@@ -170,7 +170,7 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Row className='d-lg-none ml-3 mr-3 mb-4'>
+      <Row className='d-lg-none ml-3 mr-3 mb-4 mt-xs-n3'>
         <Col xs={12}>
           <Route
             render={({ history }) => <SearchBox history={history} />}
@@ -178,7 +178,7 @@ const Header = () => {
           />
         </Col>
       </Row>
-      <Row>
+      <Row className='mt-n3'>
         <Col sm={3} xs={2}></Col>
         <Col sm={6} xs={8}>
           <Row style={{ textAlign: 'center', opacity: '80%' }}>

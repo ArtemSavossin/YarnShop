@@ -36,6 +36,12 @@ function App() {
           <Route path='/sign-in' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />
           <Route path='/profile' component={ProfileScreen} />
+          <Route
+            path='/product/:id/:from/:page'
+            component={ProductScreen}
+            exact
+          />
+          <Route path='/product/:id/:from' component={ProductScreen} exact />
           <Route path='/product/:id' component={ProductScreen} />
           <Route path='/orders/:id' component={OrderScreen} />
           <Route path='/cart/:id?' component={CartScreen} />

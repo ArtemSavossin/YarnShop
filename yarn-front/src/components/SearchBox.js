@@ -14,7 +14,7 @@ export const SearchBox = ({ history }) => {
   return (
     <Form
       onSubmit={submitHandler}
-      className='border rounded y-primary y-primary-border input-append'
+      className='border rounded-lg y-primary y-primary-border input-append'
     >
       <InputGroup>
         <Form.Control
