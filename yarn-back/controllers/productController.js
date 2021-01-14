@@ -21,9 +21,14 @@ const getProducts = asyncHandler(async (req, res) => {
     products = await Product.find({ ...keyword })
       .limit(pageSize)
       .skip(pageSize * (page - 1));
-  } else {
+  } else if (type) {
     count = await Product.countDocuments({ category: type });
     products = await Product.find({ category: type })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+  } else {
+    count = await Product.countDocuments({});
+    products = await Product.find({})
       .limit(pageSize)
       .skip(pageSize * (page - 1));
   }

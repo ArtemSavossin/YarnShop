@@ -16,7 +16,7 @@ const CardMore = ({ to }) => {
     <Link to={to} style={{ color: 'black' }} className='text-decoration-none'>
       <Card border='light' className='mt-2 shadow rounded-lg'>
         <Card.Body className='m-0'>
-          <Card.Text as='h3' className='p-0'>
+          <Card.Text as='h5' className='p-0'>
             Ещё
           </Card.Text>
         </Card.Body>
@@ -36,10 +36,8 @@ export const YarnShowcase = () => {
 
   return (
     <>
+      <h3>Пряжа</h3>
       <Table hover responsive size='sm' className='pt-2'>
-        <thead>
-          <h3>Пряжа</h3>
-        </thead>
         {loading ? (
           <Loader />
         ) : (
@@ -70,10 +68,8 @@ export const HooksShowcase = () => {
 
   return (
     <>
+      <h3>Крючки</h3>
       <Table hover responsive size='sm' className='pt-2'>
-        <thead>
-          <h3>Крючки</h3>
-        </thead>
         {loading ? (
           <Loader />
         ) : (
@@ -104,10 +100,8 @@ export const SetsShowcase = () => {
 
   return (
     <>
+      <h3>Наборы</h3>
       <Table hover responsive size='sm' className='pt-2'>
-        <thead>
-          <h3>Наборы</h3>
-        </thead>
         {loading ? (
           <Loader />
         ) : (

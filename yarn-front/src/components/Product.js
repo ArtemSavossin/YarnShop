@@ -54,7 +54,10 @@ export const ProductSM = ({ product }) => {
               <Card.Img
                 src={product.image}
                 variant='top'
-                style={{ width: '200px', height: 'auto' }}
+                style={{
+                  width: `${window.innerWidth >= 600 ? '200px' : '100px'}`,
+                  height: 'auto',
+                }}
               />
             </Link>
             <Card.Title as='div' className='pt-2 m-0'>
