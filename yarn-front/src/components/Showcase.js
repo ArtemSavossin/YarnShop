@@ -41,16 +41,18 @@ export const YarnShowcase = () => {
         {loading ? (
           <Loader />
         ) : (
-          <tr>
-            {yarn.slice(0, 6).map((y) => (
-              <td>
-                <ProductSM product={y} table />
+          <tbody>
+            <tr>
+              {yarn.slice(0, 5).map((y) => (
+                <td key={y._id}>
+                  <ProductSM product={y} table />
+                </td>
+              ))}
+              <td style={{ verticalAlign: 'middle' }}>
+                <CardMore to={'/yarn'} />
               </td>
-            ))}
-            <td style={{ verticalAlign: 'middle' }}>
-              <CardMore to={'/yarn'} />
-            </td>
-          </tr>
+            </tr>
+          </tbody>
         )}
       </Table>
     </>
@@ -73,16 +75,18 @@ export const HooksShowcase = () => {
         {loading ? (
           <Loader />
         ) : (
-          <tr>
-            {hooks.slice(0, 5).map((h) => (
-              <td>
-                <ProductSM product={h} table />
+          <tbody>
+            <tr>
+              {hooks.slice(0, 5).map((h) => (
+                <td key={h._id}>
+                  <ProductSM product={h} table />
+                </td>
+              ))}
+              <td style={{ verticalAlign: 'middle' }}>
+                <CardMore to={'/hooks'} />
               </td>
-            ))}
-            <td style={{ verticalAlign: 'middle' }}>
-              <CardMore to={'/hooks'} />
-            </td>
-          </tr>
+            </tr>
+          </tbody>
         )}
       </Table>
     </>
@@ -105,16 +109,18 @@ export const SetsShowcase = () => {
         {loading ? (
           <Loader />
         ) : (
-          <tr>
-            {sets.slice(0, 5).map((s) => (
-              <td>
-                <ProductSM product={s} table />
+          <tbody>
+            <tr>
+              {sets.slice(0, 5).map((s) => (
+                <td key={s._id}>
+                  <ProductSM product={s} table />
+                </td>
+              ))}
+              <td style={{ verticalAlign: 'middle' }}>
+                <CardMore to={'/sets'} />
               </td>
-            ))}
-            <td style={{ verticalAlign: 'middle' }}>
-              <CardMore to={'/sets'} />
-            </td>
-          </tr>
+            </tr>
+          </tbody>
         )}
       </Table>
     </>
