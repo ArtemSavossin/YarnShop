@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Navbar,
   Nav,
-  Container,
   NavDropdown,
   Row,
   Col,
@@ -29,13 +28,19 @@ const catalogPopover = (
   <Popover id='popover-basic'>
     <Popover.Content>
       <LinkContainer to='/yarn'>
-        <p>Пряжа</p>
+        <div className='p-2'>
+          <h3> Пряжа</h3>
+        </div>
       </LinkContainer>
       <LinkContainer to='/hooks'>
-        <p>Крючки</p>
+        <div className='p-2'>
+          <h3>Крючки</h3>
+        </div>
       </LinkContainer>
       <LinkContainer to='/sets'>
-        <p>Наборы</p>
+        <div className='p-2'>
+          <h3>Наборы</h3>
+        </div>
       </LinkContainer>
     </Popover.Content>
   </Popover>
