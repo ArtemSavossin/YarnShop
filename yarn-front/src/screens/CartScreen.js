@@ -48,10 +48,29 @@ const CartScreen = ({ history, match, location }) => {
               return (
                 <ListGroup.Item key={item.product}>
                   <Row>
-                    <Col xs={6} sm={2}>
-                      <Image src={item.image} rounded fluid />
+                    <Col
+                      xs={12}
+                      sm={2}
+                      className='mt-3 d-flex justify-content-center'
+                    >
+                      <Image
+                        src={item.image}
+                        rounded
+                        fluid
+                        style={{
+                          height: `${
+                            window.innerWidth <= 768 ? '180px' : 'auto'
+                          }`,
+                          width: 'auto',
+                        }}
+                      />
                     </Col>
-                    <Col xs={6} sm={3} style={{ verticalAlign: 'middle' }}>
+                    <Col
+                      xs={12}
+                      sm={3}
+                      style={{ verticalAlign: 'middle' }}
+                      className='mt-3 d-flex justify-content-center align-content-center'
+                    >
                       <Link
                         to={`/product/${item.product}`}
                         style={{ color: 'black' }}
@@ -62,11 +81,16 @@ const CartScreen = ({ history, match, location }) => {
                     <Col
                       xs={4}
                       sm={2}
+                      className='mt-3 d-flex justify-content-center align-content-center'
                       style={{ textAlign: 'center', verticalAlign: 'middle' }}
                     >
                       {item.price * item.qty || 1800 * item.qty}〒
                     </Col>
-                    <Col xs={6} sm={3}>
+                    <Col
+                      xs={6}
+                      sm={3}
+                      className='mt-3 d-flex justify-content-center align-content-center'
+                    >
                       <Form.Control
                         as='select'
                         value={item.qty}
@@ -83,7 +107,7 @@ const CartScreen = ({ history, match, location }) => {
                         ))}
                       </Form.Control>
                     </Col>
-                    <Col xs={1}>
+                    <Col xs={1} className='mt-3'>
                       <Button
                         type='button'
                         variant='light'

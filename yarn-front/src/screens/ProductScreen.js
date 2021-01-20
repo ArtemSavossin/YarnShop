@@ -119,7 +119,13 @@ const ProductScreen = ({ history, match }) => {
             </Card>
           </Col>
           <Col sm={12} lg={4}>
-            <Toast show={showAdded} style={{ display: 'float' }}>
+            <Toast
+              show={showAdded}
+              onClose={() => {
+                setShowAdded(false);
+              }}
+              style={{ display: 'float' }}
+            >
               <Toast.Header>
                 <strong className='mr-auto'>
                   Вы добавили товар в корзину!

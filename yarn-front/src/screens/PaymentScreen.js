@@ -72,7 +72,7 @@ const PaymentScreen = ({ history }) => {
                     return (
                       <ListGroup.Item key={index}>
                         <Row>
-                          <Col xs={3}>
+                          <Col xs={6} sm={3} className='mb-3'>
                             <Image
                               src={item.image}
                               alt={item.name}
@@ -80,7 +80,7 @@ const PaymentScreen = ({ history }) => {
                               rounded
                             />
                           </Col>
-                          <Col xs={4}>
+                          <Col xs={6} sm={4} className='mb-3'>
                             <Link
                               to={`/product/${item.product}`}
                               style={{ color: 'black' }}
@@ -88,7 +88,12 @@ const PaymentScreen = ({ history }) => {
                               {item.name}
                             </Link>
                           </Col>
-                          <Col xs={5} style={{ fontSize: 14 }}>
+                          <Col
+                            xs={12}
+                            sm={5}
+                            className='mb-3'
+                            style={{ fontSize: 14 }}
+                          >
                             {item.qty} x {item.price} = {item.qty * item.price}
                             〒
                           </Col>

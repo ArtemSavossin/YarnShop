@@ -99,6 +99,11 @@ const Header = () => {
               placement='bottom'
               overlay={catalogPopover}
               show={showAdded}
+              style={{
+                margin: '0 20px',
+                alignSelf: 'center',
+                justifySelf: 'center',
+              }}
             >
               <Button
                 style={{
