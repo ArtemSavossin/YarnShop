@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-//import FormContainer from '../components/FormContainer.js'
+import FormContainer from '../components/FormContainer.js';
 import { login } from '../actions/userActions';
 
 const LoginScreen = ({ history, location }) => {
@@ -29,8 +29,7 @@ const LoginScreen = ({ history, location }) => {
     dispatch(login(email, password));
   };
   return (
-    //swipe to formContainer from FormContainerJS
-    <Container>
+    <FormContainer>
       <h2>Вход</h2>
       {loading ? (
         <Loader />
@@ -74,7 +73,7 @@ const LoginScreen = ({ history, location }) => {
           </Row>
         </>
       )}
-    </Container>
+    </FormContainer>
   );
 };
 export default LoginScreen;

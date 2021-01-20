@@ -45,7 +45,7 @@ const Product = ({ product, notYarn }) => {
             <Card.Text as='div'>{product.name}</Card.Text>
             <OverlayTrigger
               trigger='click'
-              placement='right'
+              placement='bottom'
               overlay={popover}
               show={showAdded}
             >

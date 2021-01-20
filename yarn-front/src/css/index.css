@@ -1,6 +1,14 @@
 :root {
   --primary: #8a2d99;
 }
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+a {
+  color: var(--primary);
+}
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
@@ -107,4 +115,12 @@ main {
   .carousel-caption h2 {
     font-size: 2.5vw;
   }
+}
+
+.carousel-indicators {
+  margin-bottom: 0 !important;
+}
+.active {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }

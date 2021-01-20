@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -9,6 +9,8 @@ import {
   Row,
   Col,
   Button,
+  OverlayTrigger,
+  Popover,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
@@ -23,8 +25,27 @@ import {
 } from 'react-icons/fi';
 import FaIcon from './FaIcon';
 
+const catalogPopover = (
+  <Popover id='popover-basic'>
+    <Popover.Content>
+      <LinkContainer to='/yarn'>
+        <p>Пряжа</p>
+      </LinkContainer>
+      <LinkContainer to='/hooks'>
+        <p>Крючки</p>
+      </LinkContainer>
+      <LinkContainer to='/sets'>
+        <p>Наборы</p>
+      </LinkContainer>
+    </Popover.Content>
+  </Popover>
+);
+
 const Header = () => {
   const dispatch = useDispatch();
+
+  const [showAdded, setShowAdded] = useState(false);
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -72,25 +93,38 @@ const Header = () => {
           </Navbar.Brand>
         </LinkContainer>
         {window.innerWidth >= 1300 ? (
-          <Button
-            style={{
-              margin: '0 20px',
-              alignSelf: 'center',
-              justifySelf: 'center',
-              display: 'flex',
-              flexDirection: 'row',
-              height: '60px',
-              width: '140px',
-              textAlign: 'center',
-            }}
-            className='d-none d-lg-block y-primary'
-          >
-            <i
-              className='fas fa-bars'
-              style={{ paddingRight: '5px', fontSize: '22px' }}
-            />
-            <a style={{ fontSize: '22px' }}>Каталог</a>
-          </Button>
+          <>
+            <OverlayTrigger
+              trigger='click'
+              placement='bottom'
+              overlay={catalogPopover}
+              show={showAdded}
+            >
+              <Button
+                style={{
+                  margin: '0 20px',
+                  alignSelf: 'center',
+                  justifySelf: 'center',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  height: '60px',
+                  width: '140px',
+                  textAlign: 'center',
+                }}
+                className='d-none d-lg-block y-primary'
+                onClick={() => {
+                  setShowAdded(!showAdded);
+                  setTimeout(() => setShowAdded(false), 5000);
+                }}
+              >
+                <i
+                  className='fas fa-bars'
+                  style={{ paddingRight: '5px', fontSize: '22px' }}
+                />
+                <a style={{ fontSize: '22px' }}>Каталог</a>
+              </Button>
+            </OverlayTrigger>
+          </>
         ) : (
           <></>
         )}

@@ -21,6 +21,8 @@ import OrderListScreen from './screens/OrderListScreen';
 import YarnScreen from './screens/YarnScreen';
 import HooksScreen from './screens/HooksScreen';
 import SetsScreen from './screens/SetsScreen';
+import UserOrdersScreen from './screens/UserOrdersScreen';
+import ContactsScreen from './screens/ContactsScreen';
 
 //TODO send notifications on new order
 //TODO back to home screen with pages
@@ -43,7 +45,9 @@ function App() {
           />
           <Route path='/product/:id/:from' component={ProductScreen} exact />
           <Route path='/product/:id' component={ProductScreen} exact />
-          <Route path='/orders/:id' component={OrderScreen} />
+          <Route path='/orders/' component={UserOrdersScreen} exact />
+          <Route path='/orders/:id' component={OrderScreen} exact />
+          <Route path='/contacts/' component={ContactsScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/payment' component={PaymentScreen} />
