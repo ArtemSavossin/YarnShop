@@ -39,6 +39,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const config = {
       headers: {
         'Content-type': 'application/json',
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -72,6 +73,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -105,6 +107,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -139,6 +142,7 @@ export const listOrders = () => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -173,6 +177,7 @@ export const payOrder = (orderId) => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -210,6 +215,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -251,11 +257,12 @@ export const deleteOrder = (id) => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    const { data } = await axios.delete(`/api/orders/${id}`, config);
+    await axios.delete(`/api/orders/${id}`, config);
 
     dispatch({
       type: ORDER_DELETE_SUCCESS,

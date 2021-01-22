@@ -34,6 +34,7 @@ export const login = (email, password) => async (dispatch) => {
     const config = {
       headers: {
         'Content-type': 'application/json',
+        'Accept-enconding': 'gzip, compress, br',
       },
     };
 
@@ -75,6 +76,7 @@ export const register = (name, email, password) => async (dispatch) => {
     const config = {
       headers: {
         'Content-type': 'application/json',
+        'Accept-enconding': 'gzip, compress, br',
       },
     };
 
@@ -119,6 +121,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       headers: {
         'Content-type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
+        'Accept-enconding': 'gzip, compress, br',
       },
     };
 
@@ -154,6 +157,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     const config = {
       headers: {
         'Content-type': 'application/json',
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -189,6 +193,7 @@ export const listUsers = () => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -222,6 +227,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -262,6 +268,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };

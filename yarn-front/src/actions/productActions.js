@@ -37,8 +37,14 @@ export const listProducts = (keyword = '', pageNumber = '') => async (
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
+    const config = {
+      headers: {
+        'Accept-enconding': 'gzip, compress, br',
+      },
+    };
     const { data } = await axios.get(
-      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`,
+      config
     );
 
     dispatch({
@@ -60,8 +66,15 @@ export const listProductsYarn = (pageNumber = '') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_YARN_REQUEST });
 
+    const config = {
+      headers: {
+        'Accept-enconding': 'gzip, compress, br',
+      },
+    };
+
     const { data } = await axios.get(
-      `/api/products?type=yarn&pageNumber=${pageNumber}`
+      `/api/products?type=yarn&pageNumber=${pageNumber}`,
+      config
     );
 
     dispatch({
@@ -83,8 +96,15 @@ export const listProductsHooks = (pageNumber = '') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_HOOKS_REQUEST });
 
+    const config = {
+      headers: {
+        'Accept-enconding': 'gzip, compress, br',
+      },
+    };
+
     const { data } = await axios.get(
-      `/api/products?type=hooks&pageNumber=${pageNumber}`
+      `/api/products?type=hooks&pageNumber=${pageNumber}`,
+      config
     );
 
     dispatch({
@@ -106,8 +126,15 @@ export const listProductsSets = (pageNumber = '') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_SETS_REQUEST });
 
+    const config = {
+      headers: {
+        'Accept-enconding': 'gzip, compress, br',
+      },
+    };
+
     const { data } = await axios.get(
-      `/api/products?type=set&pageNumber=${pageNumber}`
+      `/api/products?type=set&pageNumber=${pageNumber}`,
+      config
     );
 
     dispatch({
@@ -129,7 +156,13 @@ export const listProductsDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/products/${id}`);
+    const config = {
+      headers: {
+        'Accept-enconding': 'gzip, compress, br',
+      },
+    };
+
+    const { data } = await axios.get(`/api/products/${id}`, config);
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -150,7 +183,13 @@ export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/products/${id}`);
+    const config = {
+      headers: {
+        'Accept-enconding': 'gzip, compress, br',
+      },
+    };
+
+    const { data } = await axios.get(`/api/products/${id}`, config);
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -179,6 +218,7 @@ export const createProduct = () => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -217,6 +257,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -259,6 +300,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Accept-enconding': 'gzip, compress, br',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };

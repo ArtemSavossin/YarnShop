@@ -81,20 +81,18 @@ export const ProductSM = ({ product }) => {
       >
         <Card border='light' className='mt-2 shadow rounded-lg'>
           <Card.Body>
-            <Link to={`/product/${product._id}${pathname}`}>
-              <Card.Img
-                src={product.image}
-                variant='top'
-                style={{
-                  width: `${window.innerWidth >= 600 ? '200px' : '100px'}`,
-                  height: 'auto',
-                }}
-              />
-            </Link>
-            <Card.Title as='div' className='pt-2 m-0'>
+            <Card.Img
+              src={product.image}
+              variant='top'
+              style={{
+                width: `${window.innerWidth >= 600 ? '200px' : '100px'}`,
+                height: 'auto',
+              }}
+            />
+            <Card.Title as='p' className='pt-2 m-0'>
               <strong>{product.price}〒</strong>
             </Card.Title>
-            <Card.Text as='div'>{product.name}</Card.Text>
+            <Card.Text as='p'>{product.name}</Card.Text>
           </Card.Body>
         </Card>
       </Link>

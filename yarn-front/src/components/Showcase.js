@@ -36,10 +36,10 @@ export const YarnShowcase = () => {
   return (
     <>
       <h3>Пряжа</h3>
-      <Table responsive size='sm' className='pt-2'>
-        {loading ? (
-          <Loader />
-        ) : (
+      {loading ? (
+        <Loader />
+      ) : (
+        <Table responsive size='sm' className='pt-2'>
           <tbody>
             <tr>
               {yarn.slice(0, 5).map((y) => (
@@ -52,8 +52,8 @@ export const YarnShowcase = () => {
               </td>
             </tr>
           </tbody>
-        )}
-      </Table>
+        </Table>
+      )}
     </>
   );
 };
