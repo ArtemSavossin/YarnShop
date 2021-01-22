@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from 'react';
 import {
   ListGroup,
   Image,
@@ -7,68 +7,67 @@ import {
   Row,
   Col,
   Card,
-} from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { saveShippingAddress } from "../actions/cartActions"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
+} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
 import {
   getOrderDetails,
   payOrder,
   deliverOrder,
   deleteOrder,
-} from "../actions/orderActions"
+} from '../actions/orderActions';
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
-} from "../constants/orderConstants"
+} from '../constants/orderConstants';
 
 const OrderScreen = ({ match, history }) => {
-  const orderId = match.params.id
-  const dispatch = useDispatch()
+  const orderId = match.params.id;
+  const dispatch = useDispatch();
 
-  const orderDetails = useSelector((state) => state.orderDetails)
-  const { order, loading, error } = orderDetails
+  const orderDetails = useSelector((state) => state.orderDetails);
+  const { order, loading, error } = orderDetails;
 
-  const orderPay = useSelector((state) => state.orderPay)
-  const { loading: loadingPay, success: successPay } = orderPay
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
-  const orderDeliver = useSelector((state) => state.orderDeliver)
-  const { loading: loadingDeliver, success: successDeliver } = orderDeliver
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   if (!loading) {
     order.itemsPrice = order.orderItems.reduce(
       (acc, item) => acc + item.price * item.qty,
       0
-    )
+    );
   }
   useEffect(() => {
     if (!userInfo) {
-      history.push("/login")
+      history.push('/login');
     }
     if (!order || order._id !== orderId || successDeliver || successPay) {
-      dispatch({ type: ORDER_PAY_RESET })
-      dispatch({ type: ORDER_DELIVER_RESET })
-      dispatch(getOrderDetails(orderId))
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, orderId, order, successDeliver, successPay])
+  }, [dispatch, orderId, order, successDeliver, successPay]);
 
   const deliverHandler = () => {
-    dispatch(deliverOrder(order))
-  }
+    dispatch(deliverOrder(order));
+  };
   const payHandler = () => {
-    dispatch(payOrder(order._id))
-  }
+    dispatch(payOrder(order._id));
+  };
   const deleteHandler = () => {
-    if (window.confirm("Точно удаляем заказ?")) {
-      dispatch(deleteOrder(order._id))
-      history.push("/admin/orderlist")
+    if (window.confirm('Точно удаляем заказ?')) {
+      dispatch(deleteOrder(order._id));
+      history.push('/admin/orderlist');
     }
-  }
+  };
   return loading ? (
     <Loader />
   ) : error ? (
@@ -77,7 +76,7 @@ const OrderScreen = ({ match, history }) => {
     <Container>
       <h2>Детали заказа {order._id}</h2>
       <Row>
-        <Col sm={4} style={{ marginTop: "24px" }}>
+        <Col sm={4} style={{ marginTop: '24px' }}>
           <Card>
             <ListGroup>
               <ListGroup.Item>Принят в обработку ✅</ListGroup.Item>
@@ -96,12 +95,12 @@ const OrderScreen = ({ match, history }) => {
                 <strong>Пользователь: </strong> {order.user.name}
               </p>
               <p>
-                <strong>Почта: </strong>{" "}
+                <strong>Почта: </strong>{' '}
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
               <p>
                 <strong>Адрес : </strong>
-                {order.shippingAddress.city}, {order.shippingAddress.address},{" "}
+                {order.shippingAddress.city}, {order.shippingAddress.address},{' '}
                 {order.shippingAddress.zipCode}
               </p>
             </ListGroup.Item>
@@ -134,7 +133,7 @@ const OrderScreen = ({ match, history }) => {
                           </Col>
                         </Row>
                       </ListGroup.Item>
-                    )
+                    );
                   })}
                   <ListGroup.Item>
                     <Row>
@@ -188,7 +187,7 @@ const OrderScreen = ({ match, history }) => {
         </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default OrderScreen
+export default OrderScreen;

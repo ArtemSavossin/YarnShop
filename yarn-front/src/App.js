@@ -1,8 +1,33 @@
 import React from 'react';
+import loadable from '@loadable/component';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+const HomeScreen = loadable(() => import('./screens/HomeScreen'));
+const ProductScreen = loadable(() => import('./screens/ProductScreen'));
+const CartScreen = loadable(() => import('./screens/CartScreen'));
+const LoginScreen = loadable(() => import('./screens/LoginScreen'));
+const RegisterScreen = loadable(() => import('./screens/RegisterScreen'));
+const ProfileScreen = loadable(() => import('./screens/ProfileScreen'));
+const ShippingScreen = loadable(() => import('./screens/ShippingScreen'));
+const PaymentScreen = loadable(() => import('./screens/PaymentScreen'));
+const OrderScreen = loadable(() => import('./screens/OrderScreen'));
+const UserListScreen = loadable(() => import('./screens/UserListScreen'));
+const UserEditScreen = loadable(() => import('./screens/UserEditScreen'));
+const ProductListScreen = loadable(() => import('./screens/ProductListScreen'));
+const ProductEditScreen = loadable(() => import('./screens/ProductEditScreen'));
+const ProductsSearchScreen = loadable(() =>
+  import('./screens/ProductsSearchScreen')
+);
+const OrderListScreen = loadable(() => import('./screens/OrderListScreen'));
+const YarnScreen = loadable(() => import('./screens/YarnScreen'));
+const HooksScreen = loadable(() => import('./screens/HooksScreen'));
+const SetsScreen = loadable(() => import('./screens/SetsScreen'));
+const UserOrdersScreen = loadable(() => import('./screens/UserOrdersScreen'));
+const ContactsScreen = loadable(() => import('./screens/ContactsScreen'));
+
+/*
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
@@ -23,7 +48,7 @@ import HooksScreen from './screens/HooksScreen';
 import SetsScreen from './screens/SetsScreen';
 import UserOrdersScreen from './screens/UserOrdersScreen';
 import ContactsScreen from './screens/ContactsScreen';
-
+*/
 //TODO send notifications on new order
 //TODO back to home screen with pages
 //TODO add popup on first vizit

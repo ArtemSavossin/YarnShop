@@ -1,6 +1,5 @@
 import {
   CART_ADD_ITEM,
-  CART_ADD_ITEM_SUCCESS,
   CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
 } from '../constants/cartConstants';

@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Form, Button, Row, Col, Table } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Button, Row, Col, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 //import FormContainer from '../components/FormContainer.js'
-import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
-import {
-  USER_UPDATE_PROFILE_RESET,
-  USER_UPDATE_PROFILE_SUCCESS,
-} from '../constants/userConstants';
 
 const UserOrdersScreen = ({ history, location }) => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState(null);
-
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -28,9 +16,6 @@ const UserOrdersScreen = ({ history, location }) => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
-
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
@@ -38,25 +23,10 @@ const UserOrdersScreen = ({ history, location }) => {
     if (!userInfo) {
       history.push('/sign-in');
     } else {
-      if (!user || !user.name || success) {
-        dispatch({ type: USER_UPDATE_PROFILE_RESET });
-        dispatch(getUserDetails('profile'));
-        dispatch(listMyOrders());
-      } else {
-        setName(user.name);
-        setEmail(user.email);
-      }
+      dispatch(listMyOrders());
     }
-  }, [history, userInfo, dispatch, user, success]);
+  }, [history, userInfo, dispatch, success]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage('Пароли не совпадают');
-    } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
-    }
-  };
   return (
     <Row>
       <Col xs={0} md={1}></Col>

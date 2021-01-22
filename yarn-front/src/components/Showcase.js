@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import Scrollbar from 'react-scrollbars-custom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Table, Button, Card } from 'react-bootstrap';
+import { Table, Card } from 'react-bootstrap';
 import { ProductSM } from './Product';
 import {
   listProductsHooks,
@@ -37,7 +36,7 @@ export const YarnShowcase = () => {
   return (
     <>
       <h3>Пряжа</h3>
-      <Table hover responsive size='sm' className='pt-2'>
+      <Table responsive size='sm' className='pt-2'>
         {loading ? (
           <Loader />
         ) : (
@@ -71,7 +70,7 @@ export const HooksShowcase = () => {
   return (
     <>
       <h3>Крючки</h3>
-      <Table hover responsive size='sm' className='pt-2'>
+      <Table responsive size='sm' className='pt-2'>
         {loading ? (
           <Loader />
         ) : (
@@ -104,25 +103,31 @@ export const SetsShowcase = () => {
 
   return (
     <>
-      <h3>Наборы</h3>
-      <Table hover responsive size='sm' className='pt-2'>
-        {loading ? (
-          <Loader />
-        ) : (
-          <tbody>
-            <tr>
-              {sets.slice(0, 5).map((s) => (
-                <td key={s._id}>
-                  <ProductSM product={s} table />
-                </td>
-              ))}
-              <td style={{ verticalAlign: 'middle' }}>
-                <CardMore to={'/sets'} />
-              </td>
-            </tr>
-          </tbody>
-        )}
-      </Table>
+      {sets.length ? (
+        <>
+          <h3>Наборы</h3>
+          <Table responsive size='sm' className='pt-2'>
+            {loading ? (
+              <Loader />
+            ) : (
+              <tbody>
+                <tr>
+                  {sets.slice(0, 5).map((s) => (
+                    <td key={s._id}>
+                      <ProductSM product={s} table />
+                    </td>
+                  ))}
+                  <td style={{ verticalAlign: 'middle' }}>
+                    <CardMore to={'/sets'} />
+                  </td>
+                </tr>
+              </tbody>
+            )}
+          </Table>
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

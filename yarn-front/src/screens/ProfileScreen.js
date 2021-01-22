@@ -8,10 +8,7 @@ import Loader from '../components/Loader';
 //import FormContainer from '../components/FormContainer.js'
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
-import {
-  USER_UPDATE_PROFILE_RESET,
-  USER_UPDATE_PROFILE_SUCCESS,
-} from '../constants/userConstants';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ history, location }) => {
   const [email, setEmail] = useState('');

@@ -8,7 +8,6 @@ import {
   ListGroup,
   Card,
   Button,
-  Form,
   Toast,
 } from 'react-bootstrap';
 import { addToCart } from '../actions/cartActions';

@@ -10,7 +10,6 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveShippingAddress } from '../actions/cartActions';
 import { createOrder } from '../actions/orderActions';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';

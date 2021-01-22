@@ -15,13 +15,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
 import { SearchBox } from './SearchBox';
 import NavButton from './NavButton';
-import {
-  FiBox,
-  FiShoppingCart,
-  FiPhone,
-  FiUser,
-  FiPackage,
-} from 'react-icons/fi';
+import { FiBox, FiShoppingCart, FiPhone, FiUser } from 'react-icons/fi';
 import FaIcon from './FaIcon';
 
 const catalogPopover = (
