@@ -3,7 +3,6 @@ import { Button, Card, OverlayTrigger, Popover } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../actions/cartActions';
-import Rating from '../components/Rating';
 
 const popover = (
   <Popover id='popover-basic'>
@@ -29,19 +28,18 @@ const Product = ({ product, notYarn }) => {
         <Card border='light' className='my-3 m-2 shadow-lg rounded-lg'>
           <Card.Body>
             <Link to={`/product/${product._id}${pathname}`}>
-              <Card.Img src={product.image} variant='top' />
+              <Card.Img
+                src={product.image}
+                variant='top'
+                style={{
+                  width: `${window.innerWidth >= 600 ? '200px' : '100px'}`,
+                  height: `${window.innerWidth >= 600 ? '200px' : '100px'}`,
+                }}
+              />
             </Link>
             <Card.Title as='div' className='pt-2 m-0'>
               <strong>{product.price}〒</strong>
             </Card.Title>
-            {notYarn ? (
-              <Rating
-                rating={product.rating}
-                text={`${product.numRev} отзывов`}
-              />
-            ) : (
-              <></>
-            )}
             <Card.Text as='div'>{product.name}</Card.Text>
             <OverlayTrigger
               trigger='click'
@@ -86,7 +84,7 @@ export const ProductSM = ({ product }) => {
               variant='top'
               style={{
                 width: `${window.innerWidth >= 600 ? '200px' : '100px'}`,
-                height: 'auto',
+                height: `${window.innerWidth >= 600 ? '200px' : '100px'}`,
               }}
             />
             <Card.Title as='p' className='pt-2 m-0'>

@@ -65,7 +65,7 @@ const ProductScreen = ({ history, match }) => {
             <Image
               src={product.image}
               alt={product.name}
-              style={{ height: 'auto%', width: '100%' }}
+              style={{ height: 'auto', width: '100%' }}
             />
           </Col>
           <Col sm={12} md={6} lg={4} className='mb-5'>

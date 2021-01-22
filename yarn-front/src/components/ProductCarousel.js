@@ -43,6 +43,15 @@ const ProductCarousel = () => {
                   alt={product.name}
                   fluid
                   className='d-block w-100 p-0 m-0'
+                  style={{
+                    height: `${
+                      window.innerWidth <= 768
+                        ? '35vw'
+                        : window.innerWidth <= 1200
+                        ? '20vw'
+                        : '250px'
+                    }`,
+                  }}
                 />
               </Link>
               <Carousel.Caption>
