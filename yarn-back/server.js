@@ -27,7 +27,7 @@ app.use('/api/upload', uploadRoutes);
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(expressStaticGzip(path.join(__dirname, 'build'), {}));
+  app.use(expressStaticGzip(path.join(__dirname, '/yarn-front/build'), {}));
   app.use(express.static(path.join(__dirname, '/yarn-front/build')));
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, 'yarn-front', 'build', 'index.html'))
