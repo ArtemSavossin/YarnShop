@@ -31,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "cd ./build/static/js && gzip *.js && cd ../css && gzip *.css",
+    "postbuild": "cd .build/static/css && gzip *.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
