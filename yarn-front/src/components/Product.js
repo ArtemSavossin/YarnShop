@@ -26,8 +26,11 @@ const Product = ({ product, notYarn }) => {
         className='text-decoration-none'
       >
         <Card border='light' className='my-3 m-2 shadow-lg rounded-lg'>
-          <Card.Body>
-            <Link to={`/product/${product._id}${pathname}`}>
+          <Card.Body className='d-flex flex-column'>
+            <Link
+              to={`/product/${product._id}${pathname}`}
+              className='justify-self-center align-self-center'
+            >
               <Card.Img
                 src={product.image}
                 variant='top'
