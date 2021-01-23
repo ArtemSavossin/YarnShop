@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -10,13 +9,10 @@ import {
   YarnShowcase,
   SetsShowcase,
 } from '../components/Showcase';
-import { listProducts } from '../actions/productActions';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
   const pageNumber = match.params.pageNumber || 1;
-
-  const dispatch = useDispatch();
 
   const error = false;
   const loading = false;

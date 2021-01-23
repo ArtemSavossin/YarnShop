@@ -1,13 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  ListGroup,
-  Image,
-  Button,
-  Container,
-  Row,
-  Col,
-  Card,
-} from 'react-bootstrap';
+import { ListGroup, Image, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../actions/orderActions';

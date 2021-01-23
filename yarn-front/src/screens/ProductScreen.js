@@ -20,7 +20,6 @@ import Meta from '../components/Meta';
 const ProductScreen = ({ history, match }) => {
   const dispatch = useDispatch();
 
-  const [qty, setQty] = useState(1);
   const [from, setFrom] = useState('/');
   const [page, setPage] = useState('/');
   const [showAdded, setShowAdded] = useState(false);

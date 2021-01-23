@@ -1,36 +1,36 @@
-import React, { useEffect } from "react"
-import { LinkContainer } from "react-router-bootstrap"
-import { Table, Button } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { listUsers, deleteUser } from "../actions/userActions"
+import React, { useEffect } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { listUsers, deleteUser } from '../actions/userActions';
 
 const UserListScreen = ({ history }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const userList = useSelector((state) => state.listUsers)
-  const { loading, error, users } = userList
+  const userList = useSelector((state) => state.listUsers);
+  const { loading, error, users } = userList;
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-  const userDelete = useSelector((state) => state.userDelete)
-  const { success: successDelete } = userDelete
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   const deleteHandler = (id) => {
-    if (window.confirm("Точно удалить?")) {
-      dispatch(deleteUser(id))
+    if (window.confirm('Точно удалить?')) {
+      dispatch(deleteUser(id));
     }
-  }
+  };
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listUsers())
+      dispatch(listUsers());
     } else {
-      history.push("/")
+      history.push('/');
     }
-  }, [dispatch, history, successDelete])
+  }, [dispatch, history, successDelete, userInfo]);
   return (
     <>
       <h2>Пользователи</h2>
@@ -55,7 +55,7 @@ const UserListScreen = ({ history }) => {
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.isAdmin ? "✅" : "❌"}</td>
+                <td>{user.isAdmin ? '✅' : '❌'}</td>
                 <td>
                   <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
@@ -76,7 +76,7 @@ const UserListScreen = ({ history }) => {
         </Table>
       )}
     </>
-  )
-}
+  );
+};
 
-export default UserListScreen
+export default UserListScreen;

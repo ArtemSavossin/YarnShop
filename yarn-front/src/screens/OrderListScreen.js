@@ -1,27 +1,27 @@
-import React, { useEffect } from "react"
-import { LinkContainer } from "react-router-bootstrap"
-import { Table, Button } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { listOrders } from "../actions/orderActions"
+import React, { useEffect } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { listOrders } from '../actions/orderActions';
 
 const OrderListScreen = ({ history }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const orderList = useSelector((state) => state.orderList)
-  const { loading, error, orders } = orderList
+  const orderList = useSelector((state) => state.orderList);
+  const { loading, error, orders } = orderList;
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listOrders())
+      dispatch(listOrders());
     } else {
-      history.push("/")
+      history.push('/');
     }
-  }, [dispatch, history])
+  }, [dispatch, history, userInfo]);
   return (
     <>
       <h2>Заказы</h2>
@@ -47,15 +47,15 @@ const OrderListScreen = ({ history }) => {
               order.itemsPrice = order.orderItems.reduce(
                 (acc, item) => acc + item.price * item.qty,
                 0
-              )
+              );
               return (
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.user.name}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
                   <td>{order.itemsPrice}</td>
-                  <td>{order.isPaid ? "✅" : "❌"}</td>
-                  <td>{order.isFinished ? "✅" : "❌"}</td>
+                  <td>{order.isPaid ? '✅' : '❌'}</td>
+                  <td>{order.isFinished ? '✅' : '❌'}</td>
                   <td>
                     <LinkContainer to={`/orders/${order._id}`}>
                       <Button className='btn-sm' variant='light'>
@@ -64,13 +64,13 @@ const OrderListScreen = ({ history }) => {
                     </LinkContainer>
                   </td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </Table>
       )}
     </>
-  )
-}
+  );
+};
 
-export default OrderListScreen
+export default OrderListScreen;

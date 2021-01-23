@@ -11,7 +11,11 @@ const ContactsScreen = () => {
           <tr>
             <td>Instagram</td>
             <td>
-              <a href='https://www.instagram.com/miss.yarn/' target='_blank'>
+              <a
+                href='https://www.instagram.com/miss.yarn/'
+                target='_blank'
+                rel='noreferrer'
+              >
                 @miss.yarn
               </a>
             </td>
@@ -19,7 +23,11 @@ const ContactsScreen = () => {
           <tr>
             <td>Whatsapp</td>
             <td>
-              <a href='https://wa.me/87015359475' target='_blank'>
+              <a
+                href='https://wa.me/87015359475'
+                target='_blank'
+                rel='noreferrer'
+              >
                 87015359475
               </a>
             </td>
@@ -27,7 +35,11 @@ const ContactsScreen = () => {
           <tr>
             <td>Telegram</td>
             <td>
-              <a href='tg://resolve?domain=MissYarnBot' target='_blank'>
+              <a
+                href='tg://resolve?domain=MissYarnBot'
+                target='_blank'
+                rel='noreferrer'
+              >
                 87015359475
               </a>{' '}
             </td>
