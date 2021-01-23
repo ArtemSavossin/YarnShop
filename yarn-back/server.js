@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import expressStaticGzip from 'express-static-gzip';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 
