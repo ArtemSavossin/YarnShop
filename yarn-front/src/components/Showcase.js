@@ -42,11 +42,15 @@ export const YarnShowcase = () => {
         <Table responsive size='sm' className='pt-2'>
           <tbody>
             <tr>
-              {yarn.slice(0, 5).map((y) => (
-                <td key={y._id}>
-                  <ProductSM product={y} table />
-                </td>
-              ))}
+              {yarn ? (
+                yarn.slice(0, 5).map((y) => (
+                  <td key={y._id}>
+                    <ProductSM product={y} table />
+                  </td>
+                ))
+              ) : (
+                <></>
+              )}
               <td style={{ verticalAlign: 'middle' }}>
                 <CardMore to={'/yarn'} />
               </td>
@@ -76,11 +80,15 @@ export const HooksShowcase = () => {
         ) : (
           <tbody>
             <tr>
-              {hooks.slice(0, 5).map((h) => (
-                <td key={h._id}>
-                  <ProductSM product={h} table />
-                </td>
-              ))}
+              {hooks ? (
+                hooks.slice(0, 5).map((h) => (
+                  <td key={h._id}>
+                    <ProductSM product={h} table />
+                  </td>
+                ))
+              ) : (
+                <></>
+              )}
               <td style={{ verticalAlign: 'middle' }}>
                 <CardMore to={'/hooks'} />
               </td>
@@ -112,11 +120,15 @@ export const SetsShowcase = () => {
             ) : (
               <tbody>
                 <tr>
-                  {sets.slice(0, 5).map((s) => (
-                    <td key={s._id}>
-                      <ProductSM product={s} table />
-                    </td>
-                  ))}
+                  {sets ? (
+                    sets.slice(0, 5).map((s) => (
+                      <td key={s._id}>
+                        <ProductSM product={s} table />
+                      </td>
+                    ))
+                  ) : (
+                    <></>
+                  )}
                   <td style={{ verticalAlign: 'middle' }}>
                     <CardMore to={'/sets'} />
                   </td>
