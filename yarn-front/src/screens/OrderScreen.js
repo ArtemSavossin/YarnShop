@@ -54,7 +54,7 @@ const OrderScreen = ({ match, history }) => {
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, orderId, order, successDeliver, successPay, history]);
+  }, [dispatch, orderId, order, successDeliver, successPay, history, userInfo]);
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
