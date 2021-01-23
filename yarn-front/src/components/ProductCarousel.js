@@ -28,13 +28,8 @@ const ProductCarousel = () => {
             <Carousel.Item
               key={product._id}
               style={{
-                height: `${
-                  window.innerWidth <= 768
-                    ? '35vw'
-                    : window.innerWidth <= 1200
-                    ? '20vw'
-                    : '250px'
-                }`,
+                width: '100%',
+                height: 'auto',
               }}
             >
               <Link to={`/product/${product._id}`}>
@@ -44,13 +39,8 @@ const ProductCarousel = () => {
                   fluid
                   className='d-block w-100 p-0 m-0'
                   style={{
-                    height: `${
-                      window.innerWidth <= 768
-                        ? '35vw'
-                        : window.innerWidth <= 1200
-                        ? '20vw'
-                        : '250px'
-                    }`,
+                    width: '100%',
+                    height: 'auto',
                   }}
                 />
               </Link>
