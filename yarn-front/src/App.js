@@ -3,7 +3,7 @@ import loadable from '@loadable/component';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Footer from './components/Footer';
+const Footer = loadable(() => import('./components/Footer'));
 const HomeScreen = loadable(() => import('./screens/HomeScreen'));
 const ProductScreen = loadable(() => import('./screens/ProductScreen'));
 const CartScreen = loadable(() => import('./screens/CartScreen'));
@@ -27,32 +27,10 @@ const SetsScreen = loadable(() => import('./screens/SetsScreen'));
 const UserOrdersScreen = loadable(() => import('./screens/UserOrdersScreen'));
 const ContactsScreen = loadable(() => import('./screens/ContactsScreen'));
 
-/*
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
-import CartScreen from './screens/CartScreen';
-import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import ShippingScreen from './screens/ShippingScreen';
-import PaymentScreen from './screens/PaymentScreen';
-import OrderScreen from './screens/OrderScreen';
-import UserListScreen from './screens/UserListScreen';
-import UserEditScreen from './screens/UserEditScreen';
-import ProductListScreen from './screens/ProductListScreen';
-import ProductEditScreen from './screens/ProductEditScreen';
-import ProductsSearchScreen from './screens/ProductsSearchScreen';
-import OrderListScreen from './screens/OrderListScreen';
-import YarnScreen from './screens/YarnScreen';
-import HooksScreen from './screens/HooksScreen';
-import SetsScreen from './screens/SetsScreen';
-import UserOrdersScreen from './screens/UserOrdersScreen';
-import ContactsScreen from './screens/ContactsScreen';
-*/
 //TODO send notifications on new order
-//TODO back to home screen with pages
 //TODO add popup on first vizit
-// TODO -m
+// Fix showcases scroller maybe
+// Add
 
 function App() {
   return (
@@ -115,7 +93,9 @@ function App() {
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>
-      <Footer />
+      <Suspense fallback={<footer>creators</footer>}>
+        <Footer />
+      </Suspense>
     </Router>
   );
 }
