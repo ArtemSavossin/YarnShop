@@ -106,7 +106,9 @@ main {
   width: 10px;
   margin: 0 4px !important;
 }
-
+.pointer {
+  cursor: pointer;
+}
 .page-item.active .page-link {
   background-color: var(--primary);
   border-color: var(--primary);

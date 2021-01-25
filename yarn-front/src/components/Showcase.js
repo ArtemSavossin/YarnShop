@@ -111,7 +111,7 @@ export const SetsShowcase = () => {
 
   return (
     <>
-      {sets.length ? (
+      {sets && sets.length ? (
         <>
           <h3>Наборы</h3>
           <Table responsive size='sm' className='pt-2'>

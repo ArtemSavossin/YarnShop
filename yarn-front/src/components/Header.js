@@ -21,17 +21,17 @@ import FaIcon from './FaIcon';
 const catalogPopover = (
   <Popover id='popover-basic'>
     <Popover.Content>
-      <LinkContainer to='/yarn'>
+      <LinkContainer className='pointer' to='/yarn'>
         <div className='p-2'>
           <h3> Пряжа</h3>
         </div>
       </LinkContainer>
-      <LinkContainer to='/hooks'>
+      <LinkContainer className='pointer' to='/hooks'>
         <div className='p-2'>
           <h3>Крючки</h3>
         </div>
       </LinkContainer>
-      <LinkContainer to='/sets'>
+      <LinkContainer className='pointer' to='/sets'>
         <div className='p-2'>
           <h3>Наборы</h3>
         </div>
@@ -125,7 +125,7 @@ const Header = () => {
                   className='fas fa-bars'
                   style={{ paddingRight: '5px', fontSize: '22px' }}
                 />
-                <a style={{ fontSize: '22px' }}>Каталог</a>
+                <span style={{ fontSize: '22px' }}>Каталог</span>
               </Button>
             </OverlayTrigger>
           </>
@@ -148,7 +148,7 @@ const Header = () => {
           className='align-self-end justify-content-around'
         >
           <Nav className='ml-3'>
-            <LinkContainer to='/orders'>
+            <LinkContainer className='pointer' to='/orders'>
               <Nav.Link>
                 <NavButton
                   name='Заказы'
@@ -156,7 +156,7 @@ const Header = () => {
                 />
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/contacts'>
+            <LinkContainer className='pointer' to='/contacts'>
               <Nav.Link>
                 <NavButton
                   name='Контакты'
@@ -164,7 +164,10 @@ const Header = () => {
                 />
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/cart' className='d-none d-sm-block d-xs-block'>
+            <LinkContainer
+              to='/cart'
+              className='d-none d-sm-block d-xs-block pointer'
+            >
               <Nav.Link>
                 <NavButton
                   name='Корзина'
@@ -183,13 +186,14 @@ const Header = () => {
             </LinkContainer>
             {userInfo ? (
               <NavButton
+                className='pointer'
                 name={
                   <NavDropdown
                     title='Профиль'
                     id='username'
                     style={{ paddingTop: '0px !important' }}
                   >
-                    <LinkContainer to='/profile'>
+                    <LinkContainer className='pointer' to='/profile'>
                       <NavDropdown.Item>Личный кабинет</NavDropdown.Item>
                     </LinkContainer>
                     <NavDropdown.Item onClick={logoutHandler}>
@@ -200,7 +204,7 @@ const Header = () => {
                 icon={<FiUser style={{ fontSize: '35px' }} />}
               />
             ) : (
-              <LinkContainer to='/sign-in'>
+              <LinkContainer className='pointer' to='/sign-in'>
                 <Nav.Link>
                   <NavButton
                     name='Аккаунт'
@@ -213,13 +217,13 @@ const Header = () => {
               <NavButton
                 name={
                   <NavDropdown title='Администрирование' id='admin'>
-                    <LinkContainer to='/admin/userlist'>
+                    <LinkContainer className='pointer' to='/admin/userlist'>
                       <NavDropdown.Item>Пользователи</NavDropdown.Item>
                     </LinkContainer>
-                    <LinkContainer to='/admin/orderlist'>
+                    <LinkContainer className='pointer' to='/admin/orderlist'>
                       <NavDropdown.Item>Заказы</NavDropdown.Item>
                     </LinkContainer>
-                    <LinkContainer to='/admin/productlist'>
+                    <LinkContainer className='pointer' to='/admin/productlist'>
                       <NavDropdown.Item>Товары</NavDropdown.Item>
                     </LinkContainer>
                   </NavDropdown>
@@ -244,13 +248,13 @@ const Header = () => {
         <Col sm={3} xs={2}></Col>
         <Col sm={6} xs={8}>
           <Row style={{ textAlign: 'center', opacity: '80%' }}>
-            <LinkContainer to='/yarn'>
+            <LinkContainer className='pointer' to='/yarn'>
               <Col xs={4}>Пряжа</Col>
             </LinkContainer>
-            <LinkContainer to='/hooks'>
+            <LinkContainer className='pointer' to='/hooks'>
               <Col xs={4}>Крючки</Col>
             </LinkContainer>
-            <LinkContainer to='/sets'>
+            <LinkContainer className='pointer' to='/sets'>
               <Col xs={4}>Наборы</Col>
             </LinkContainer>
           </Row>
