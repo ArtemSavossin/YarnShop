@@ -25,7 +25,7 @@ const PaymentScreen = ({ history }) => {
 
   useEffect(() => {
     if (success) {
-      history.push(`/orders/${order._id}`);
+      history.push(`/postedOrder/${order._id}`);
     }
     // eslint-disable-next-line
   }, [success, history]);

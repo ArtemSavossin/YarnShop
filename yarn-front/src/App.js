@@ -26,6 +26,7 @@ const HooksScreen = loadable(() => import('./screens/HooksScreen'));
 const SetsScreen = loadable(() => import('./screens/SetsScreen'));
 const UserOrdersScreen = loadable(() => import('./screens/UserOrdersScreen'));
 const ContactsScreen = loadable(() => import('./screens/ContactsScreen'));
+const PostedOrderScreen = loadable(() => import('./screens/PostedOrderScreen'));
 
 //TODO send notifications on new order
 //TODO add popup on first vizit
@@ -49,6 +50,11 @@ function App() {
             />
             <Route path='/product/:id/:from' component={ProductScreen} exact />
             <Route path='/product/:id' component={ProductScreen} exact />
+            <Route
+              path='/postedOrder/:id'
+              component={PostedOrderScreen}
+              exact
+            />
             <Route path='/orders/' component={UserOrdersScreen} exact />
             <Route path='/orders/:id' component={OrderScreen} exact />
             <Route path='/contacts/' component={ContactsScreen} />
