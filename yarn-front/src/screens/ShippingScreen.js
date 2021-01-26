@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
+import FormContainer from '../components/FormContainer';
 
 export const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -20,7 +21,7 @@ export const ShippingScreen = ({ history }) => {
     history.push('/payment');
   };
   return (
-    <Container>
+    <FormContainer>
       <CheckoutSteps step1 step2 />
       <h2>Доставка</h2>
       <Form onSubmit={submitHandler}>
@@ -43,7 +44,9 @@ export const ShippingScreen = ({ history }) => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='zip'>
-          <Form.Label>Почтовый код</Form.Label>
+          <Form.Label>
+            Почтовый код (введите, если доставка не по Нур-султану)
+          </Form.Label>
           <Form.Control
             type='text'
             placeholder='01000'
@@ -55,7 +58,7 @@ export const ShippingScreen = ({ history }) => {
           Вперед
         </Button>
       </Form>
-    </Container>
+    </FormContainer>
   );
 };
 

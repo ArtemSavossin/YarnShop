@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../actions/orderActions';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { clearCart } from '../actions/cartActions';
 
 const PaymentScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const PaymentScreen = ({ history }) => {
 
   useEffect(() => {
     if (success) {
+      dispatch(clearCart());
       history.push(`/postedOrder/${order._id}`);
     }
     // eslint-disable-next-line

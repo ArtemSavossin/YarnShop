@@ -11,7 +11,9 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ history, location }) => {
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
@@ -41,6 +43,7 @@ const ProfileScreen = ({ history, location }) => {
       } else {
         setName(user.name);
         setEmail(user.email);
+        setPhone(user.phone || '');
       }
     }
   }, [history, userInfo, dispatch, user, success]);
@@ -50,7 +53,16 @@ const ProfileScreen = ({ history, location }) => {
     if (password !== confirmPassword) {
       setMessage('Пароли не совпадают');
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          name,
+          email,
+          phone,
+          oldPassword,
+          password,
+        })
+      );
     }
   };
   return (
@@ -84,8 +96,26 @@ const ProfileScreen = ({ history, location }) => {
                   onChange={(e) => setEmail(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              <Form.Group controlId='password'>
-                <Form.Label>Пароль</Form.Label>
+              <Form.Group controlId='email'>
+                <Form.Label>Номер телефона</Form.Label>
+                <Form.Control
+                  type='phone'
+                  placeholder='+77776665544'
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='oldpassword'>
+                <Form.Label>Старый пароль</Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='****'
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='newpassword'>
+                <Form.Label>Новый пароль</Form.Label>
                 <Form.Control
                   type='password'
                   placeholder='****'

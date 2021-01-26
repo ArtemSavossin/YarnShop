@@ -9,6 +9,7 @@ import { register } from '../actions/userActions';
 
 const RegisterScreen = ({ history, location }) => {
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -32,7 +33,7 @@ const RegisterScreen = ({ history, location }) => {
     if (password !== confirmPassword) {
       setMessage('Пароли не совпадают');
     } else {
-      dispatch(register(name, email, password));
+      dispatch(register(name, email, phone, password));
     }
   };
   return (
@@ -64,6 +65,15 @@ const RegisterScreen = ({ history, location }) => {
                 onChange={(e) => setEmail(e.target.value)}
               ></Form.Control>
             </Form.Group>
+            <Form.Group controlId='email'>
+              <Form.Label>Введите ваш телефон</Form.Label>
+              <Form.Control
+                type='phone'
+                placeholder='+77776665544'
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
             <Form.Group controlId='password'>
               <Form.Label>Пароль</Form.Label>
               <Form.Control
@@ -90,7 +100,9 @@ const RegisterScreen = ({ history, location }) => {
           <Row className='py-3'>
             <Col>
               Уже есть аккаунт?{' '}
-              <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+              <Link
+                to={redirect ? `/sign-in?redirect=${redirect}` : '/sign-in'}
+              >
                 Войти
               </Link>
             </Col>
