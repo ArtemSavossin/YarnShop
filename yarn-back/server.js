@@ -18,7 +18,7 @@ const app = express();
 const __dirname = path.resolve();
 
 app.use(express.json());
-
+console.log(process.env);
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
