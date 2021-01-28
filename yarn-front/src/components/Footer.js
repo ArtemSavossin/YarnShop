@@ -9,7 +9,16 @@ const Footer = () => {
           <Col xs={12} sm={4} className='text-center py-3'>
             <Row className='text-center'>
               <Col xs={12}>Miss Yarn в соцсетях:</Col>
-              <Col xs={12}>Instagram</Col>
+              <Col xs={12}>
+                <a
+                  href='https://www.instagram.com/miss.yarn/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  {' '}
+                  Instagram
+                </a>
+              </Col>
               <Col xs={12}>VK</Col>
             </Row>
           </Col>

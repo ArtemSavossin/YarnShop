@@ -12,7 +12,7 @@ import uploadRoutes from './routes/uploadRoutes.js';
 dotenv.config();
 
 connectDB();
-
+console.log(process.env.JWT_SECRET);
 const app = express();
 
 const __dirname = path.resolve();
