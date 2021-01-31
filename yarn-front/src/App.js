@@ -3,6 +3,9 @@ import loadable from '@loadable/component';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
+const BottomsScreen = loadable(() => import('./screens/BottomsScreen'));
+const MastersScreen = loadable(() => import('./screens/MastersScreen'));
+const HelpScreen = loadable(() => import('./screens/HelpScreen'));
 const Footer = loadable(() => import('./components/Footer'));
 const HomeScreen = loadable(() => import('./screens/HomeScreen'));
 const ProductScreen = loadable(() => import('./screens/ProductScreen'));
@@ -94,6 +97,19 @@ function App() {
             <Route path='/hooks/:pageNumber' component={HooksScreen} exact />
             <Route path='/sets' component={SetsScreen} exact />
             <Route path='/sets/:pageNumber' component={SetsScreen} exact />
+            <Route path='/bottoms' component={BottomsScreen} exact />
+            <Route
+              path='/bottoms/:pageNumber'
+              component={BottomsScreen}
+              exact
+            />
+            <Route path='/masters' component={MastersScreen} exact />
+            <Route
+              path='/masters/:pageNumber'
+              component={MastersScreen}
+              exact
+            />
+            <Route path='/help' component={HelpScreen} exact />
           </Suspense>
 
           <Route path='/' component={HomeScreen} exact />

@@ -15,7 +15,13 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
 import { SearchBox } from './SearchBox';
 import NavButton from './NavButton';
-import { FiBox, FiShoppingCart, FiPhone, FiUser } from 'react-icons/fi';
+import {
+  FiPackage,
+  FiShoppingCart,
+  FiPhone,
+  FiUser,
+  FiHelpCircle,
+} from 'react-icons/fi';
 import FaIcon from './FaIcon';
 
 const catalogPopover = (
@@ -31,9 +37,19 @@ const catalogPopover = (
           <h3>Крючки</h3>
         </div>
       </LinkContainer>
+      <LinkContainer className='pointer' to='/bottoms'>
+        <div className='p-2'>
+          <h3>Донышки</h3>
+        </div>
+      </LinkContainer>
       <LinkContainer className='pointer' to='/sets'>
         <div className='p-2'>
           <h3>Наборы</h3>
+        </div>
+      </LinkContainer>
+      <LinkContainer className='pointer' to='/masters'>
+        <div className='p-2'>
+          <h3>Мастерклассы</h3>
         </div>
       </LinkContainer>
     </Popover.Content>
@@ -44,6 +60,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const [showAdded, setShowAdded] = useState(false);
+  const [showExtra, setShowExtra] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -148,11 +165,19 @@ const Header = () => {
           className='align-self-end justify-content-around'
         >
           <Nav className='ml-3'>
+            <LinkContainer className='pointer' to='/help'>
+              <Nav.Link>
+                <NavButton
+                  name='Помощь'
+                  icon={<FiHelpCircle style={{ fontSize: '35px' }} />}
+                />
+              </Nav.Link>
+            </LinkContainer>
             <LinkContainer className='pointer' to='/orders'>
               <Nav.Link>
                 <NavButton
                   name='Заказы'
-                  icon={<FiBox style={{ fontSize: '35px' }} />}
+                  icon={<FiPackage style={{ fontSize: '35px' }} />}
                 />
               </Nav.Link>
             </LinkContainer>
@@ -245,21 +270,71 @@ const Header = () => {
         </Col>
       </Row>
       <Row className='mt-n3'>
-        <Col sm={3} xs={2}></Col>
-        <Col sm={6} xs={8}>
+        <Col sm={1} xs={2}></Col>
+        <Col xs={10} className='d-none d-sm-block'>
           <Row style={{ textAlign: 'center', opacity: '80%' }}>
             <LinkContainer className='pointer' to='/yarn'>
-              <Col xs={4}>Пряжа</Col>
+              <Col xs={2}>Пряжа</Col>
             </LinkContainer>
             <LinkContainer className='pointer' to='/hooks'>
-              <Col xs={4}>Крючки</Col>
+              <Col xs={2}>Крючки</Col>
+            </LinkContainer>
+            <LinkContainer className='pointer' to='/bottoms'>
+              <Col xs={2}>Донышки</Col>
             </LinkContainer>
             <LinkContainer className='pointer' to='/sets'>
-              <Col xs={4}>Наборы</Col>
+              <Col xs={2}>Наборы</Col>
+            </LinkContainer>
+            <LinkContainer className='pointer' to='/masters'>
+              <Col xs={2}>Мастер-классы</Col>
+            </LinkContainer>
+            <LinkContainer className='pointer' to='/help'>
+              <Col xs={2}>Что делать?</Col>
             </LinkContainer>
           </Row>
         </Col>
-        <Col sm={3} xs={2}></Col>
+        <Col xs={8} className='d-block d-sm-none'>
+          <Row style={{ textAlign: 'center', opacity: '80%' }}>
+            <Col
+              xs={6}
+              onClick={() => {
+                setShowExtra(!showExtra);
+                setTimeout(() => {
+                  setShowExtra(false);
+                }, 5000);
+              }}
+            >
+              Товары &#x25BC;
+            </Col>
+            <LinkContainer className='pointer' to='/help'>
+              <Col xs={6}>Подсказки</Col>
+            </LinkContainer>
+          </Row>
+        </Col>
+        <Col sm={1} xs={2}></Col>
+        {showExtra ? (
+          <Col xs={12}>
+            <Row style={{ textAlign: 'center', opacity: '80%' }}>
+              <LinkContainer className='pointer' to='/yarn'>
+                <Col xs={2}>Пряжа</Col>
+              </LinkContainer>
+              <LinkContainer className='pointer' to='/hooks'>
+                <Col xs={2}>Крючки</Col>
+              </LinkContainer>
+              <LinkContainer className='pointer' to='/bottoms'>
+                <Col xs={4}>Донышки</Col>
+              </LinkContainer>
+              <LinkContainer className='pointer' to='/sets'>
+                <Col xs={2}>Наборы</Col>
+              </LinkContainer>
+              <LinkContainer className='pointer' to='/masters'>
+                <Col xs={2}>MK</Col>
+              </LinkContainer>
+            </Row>
+          </Col>
+        ) : (
+          <></>
+        )}
       </Row>
     </header>
   );

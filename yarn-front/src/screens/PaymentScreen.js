@@ -52,7 +52,7 @@ const PaymentScreen = ({ history }) => {
               <p>
                 <strong>Адрес : </strong>
                 {cart.shippingAddress.city}, {cart.shippingAddress.address},{' '}
-                {cart.shippingAddress.zipCode}
+                {cart.shippingAddress.deliveryType}
               </p>
             </ListGroup.Item>
             <ListGroup.Item>
