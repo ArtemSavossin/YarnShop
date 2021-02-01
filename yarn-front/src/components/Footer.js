@@ -107,21 +107,63 @@ const Footer = () => {
                   Instagram
                 </a>
               </Col>
-              <Col xs={12}>VK</Col>
+              <Col xs={12}>
+                <a
+                  href='https://wa.me/87015359475'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  {' '}
+                  Whatsapp
+                </a>
+              </Col>
             </Row>
           </Col>
           <Col xs={12} sm={4} className='text-center py-3'>
             <Row className='text-center'>
               <Col xs={12}>Техподдержка</Col>
-              <Col xs={12}>Telegram</Col>
-              <Col xs={12}>VK</Col>
+              <Col xs={12}>
+                <a
+                  href='https://t.me/ArtyomSavossin'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Telegram
+                </a>
+              </Col>
+              <Col xs={12}>
+                <a
+                  href='https://wa.me/87015359475'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  {' '}
+                  Whatsapp
+                </a>
+              </Col>
             </Row>
           </Col>
           <Col xs={12} sm={4} className='text-center py-3'>
             <Row className='text-center'>
               <Col xs={12}>Сотрудничество с разработчиками</Col>
-              <Col xs={12}>Дизайнер</Col>
-              <Col xs={12}>Разаработчик сайта</Col>
+              <Col xs={12}>
+                <a
+                  href='https://vk.com/pabloiivdesign'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Дизайнер{' '}
+                </a>
+              </Col>
+              <Col xs={12}>
+                <a
+                  href='https://t.me/ArtyomSavossin'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Разаработчик сайта
+                </a>
+              </Col>
             </Row>
           </Col>
         </Row>
