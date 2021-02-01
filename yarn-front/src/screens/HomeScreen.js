@@ -8,6 +8,7 @@ import {
   HooksShowcase,
   YarnShowcase,
   SetsShowcase,
+  BottomsShowcase,
 } from '../components/Showcase';
 
 const HomeScreen = ({ match }) => {
@@ -40,6 +41,7 @@ const HomeScreen = ({ match }) => {
         <>
           <YarnShowcase />
           <HooksShowcase />
+          <BottomsShowcase />
           <SetsShowcase />
         </>
       )}

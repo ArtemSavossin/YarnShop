@@ -7,6 +7,7 @@ import {
   listProductsHooks,
   listProductsYarn,
   listProductsSets,
+  listProductsBottoms,
 } from '../actions/productActions';
 import Loader from './Loader';
 
@@ -82,6 +83,44 @@ export const HooksShowcase = () => {
             <tr>
               {hooks ? (
                 hooks.slice(0, 5).map((h) => (
+                  <td key={h._id}>
+                    <ProductSM product={h} table />
+                  </td>
+                ))
+              ) : (
+                <></>
+              )}
+              <td style={{ verticalAlign: 'middle' }}>
+                <CardMore to={'/hooks'} />
+              </td>
+            </tr>
+          </tbody>
+        )}
+      </Table>
+    </>
+  );
+};
+
+export const BottomsShowcase = () => {
+  const dispatch = useDispatch();
+
+  const productListBottoms = useSelector((state) => state.productListBottoms);
+  const { loading, bottoms } = productListBottoms;
+  useEffect(() => {
+    dispatch(listProductsBottoms(1));
+  }, [dispatch]);
+
+  return (
+    <>
+      <h3>Крючки</h3>
+      <Table responsive size='sm' className='pt-2'>
+        {loading ? (
+          <Loader />
+        ) : (
+          <tbody>
+            <tr>
+              {bottoms ? (
+                bottoms.slice(0, 5).map((h) => (
                   <td key={h._id}>
                     <ProductSM product={h} table />
                   </td>
