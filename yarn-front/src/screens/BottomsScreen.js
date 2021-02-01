@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
-import { listProductsHooks } from '../actions/productActions';
+import { listProductsBottoms } from '../actions/productActions';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
 import Message from '../components/Message';
@@ -13,11 +13,11 @@ const BottomsScreen = ({ match }) => {
 
   const dispatch = useDispatch();
 
-  const productListHooks = useSelector((state) => state.productListHooks);
-  const { loading, error, hooks, page, pages } = productListHooks;
+  const productListBottoms = useSelector((state) => state.productListBottoms);
+  const { loading, error, bottoms, page, pages } = productListBottoms;
 
   useEffect(() => {
-    dispatch(listProductsHooks(pageNumber));
+    dispatch(listProductsBottoms(pageNumber));
   }, [dispatch, pageNumber]);
 
   return (
@@ -31,8 +31,8 @@ const BottomsScreen = ({ match }) => {
       ) : (
         <>
           <Row>
-            {hooks &&
-              hooks.map((p) => (
+            {bottoms &&
+              bottoms.map((p) => (
                 <Col
                   xs={6}
                   sm={6}

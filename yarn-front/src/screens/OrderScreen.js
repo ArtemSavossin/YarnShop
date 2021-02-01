@@ -101,7 +101,7 @@ const OrderScreen = ({ match, history }) => {
               <p>
                 <strong>Адрес : </strong>
                 {order.shippingAddress.city}, {order.shippingAddress.address},{' '}
-                {order.shippingAddress.zipCode}
+                {order.shippingAddress.deliveryType}
               </p>
             </ListGroup.Item>
             <ListGroup.Item>

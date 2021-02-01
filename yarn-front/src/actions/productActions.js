@@ -26,6 +26,12 @@ import {
   PRODUCT_LIST_SETS_REQUEST,
   PRODUCT_LIST_SETS_SUCCESS,
   PRODUCT_LIST_SETS_FAIL,
+  PRODUCT_LIST_BOTTOMS_REQUEST,
+  PRODUCT_LIST_BOTTOMS_SUCCESS,
+  PRODUCT_LIST_BOTTOMS_FAIL,
+  PRODUCT_LIST_MASTERS_REQUEST,
+  PRODUCT_LIST_MASTERS_SUCCESS,
+  PRODUCT_LIST_MASTERS_FAIL,
 } from '../constants/productConstants';
 import axios from 'axios';
 
@@ -103,7 +109,7 @@ export const listProductsHooks = (pageNumber = '') => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `/api/products?type=hooks&pageNumber=${pageNumber}`,
+      `/api/products?type=hook&pageNumber=${pageNumber}`,
       config
     );
 
@@ -144,6 +150,66 @@ export const listProductsSets = (pageNumber = '') => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: PRODUCT_LIST_SETS_FAIL,
+      payload:
+        e.response && e.response.data.message
+          ? e.response.data.message
+          : e.message,
+    });
+  }
+};
+
+export const listProductsBottoms = (pageNumber = '') => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_LIST_BOTTOMS_REQUEST });
+
+    const config = {
+      headers: {
+        'Accept-enconding': 'gzip, compress, br',
+      },
+    };
+
+    const { data } = await axios.get(
+      `/api/products?type=bottom&pageNumber=${pageNumber}`,
+      config
+    );
+
+    dispatch({
+      type: PRODUCT_LIST_BOTTOMS_SUCCESS,
+      payload: data,
+    });
+  } catch (e) {
+    dispatch({
+      type: PRODUCT_LIST_BOTTOMS_FAIL,
+      payload:
+        e.response && e.response.data.message
+          ? e.response.data.message
+          : e.message,
+    });
+  }
+};
+
+export const listProductsMasters = (pageNumber = '') => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_LIST_MASTERS_REQUEST });
+
+    const config = {
+      headers: {
+        'Accept-enconding': 'gzip, compress, br',
+      },
+    };
+
+    const { data } = await axios.get(
+      `/api/products?type=master&pageNumber=${pageNumber}`,
+      config
+    );
+
+    dispatch({
+      type: PRODUCT_LIST_MASTERS_SUCCESS,
+      payload: data,
+    });
+  } catch (e) {
+    dispatch({
+      type: PRODUCT_LIST_MASTERS_FAIL,
       payload:
         e.response && e.response.data.message
           ? e.response.data.message

@@ -73,7 +73,13 @@ const PostedOrderScreen = ({ match, history }) => {
         <Row>
           <Col xs={1} sm={3}></Col>
           <Col xs={10} sm={6}>
-            <LinkContainer to='/main'>
+            <LinkContainer
+              to='/'
+              style={{
+                fontWeight: '700',
+                paddingBottom: '0.375rem !important',
+              }}
+            >
               <Button
                 className='d-block'
                 style={{

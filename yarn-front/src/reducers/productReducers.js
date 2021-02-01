@@ -28,6 +28,12 @@ import {
   PRODUCT_LIST_SETS_REQUEST,
   PRODUCT_LIST_SETS_SUCCESS,
   PRODUCT_LIST_SETS_FAIL,
+  PRODUCT_LIST_MASTERS_REQUEST,
+  PRODUCT_LIST_MASTERS_SUCCESS,
+  PRODUCT_LIST_MASTERS_FAIL,
+  PRODUCT_LIST_BOTTOMS_REQUEST,
+  PRODUCT_LIST_BOTTOMS_SUCCESS,
+  PRODUCT_LIST_BOTTOMS_FAIL,
 } from '../constants/productConstants';
 
 export const productListReducer = (state = { products: [] }, action) => {
@@ -96,6 +102,41 @@ export const productListSetsReducer = (state = { sets: [] }, action) => {
         page: action.payload.page,
       };
     case PRODUCT_LIST_SETS_FAIL:
+      return { loading: false, error: action.playload };
+    default:
+      return state;
+  }
+};
+export const productListBottomsReducer = (state = { bottoms: [] }, action) => {
+  switch (action.type) {
+    case PRODUCT_LIST_BOTTOMS_REQUEST:
+      return { loading: true, bottoms: [] };
+    case PRODUCT_LIST_BOTTOMS_SUCCESS:
+      return {
+        loading: false,
+        bottoms: action.payload.products,
+        pages: action.payload.products,
+        page: action.payload.page,
+      };
+    case PRODUCT_LIST_BOTTOMS_FAIL:
+      return { loading: false, error: action.playload };
+    default:
+      return state;
+  }
+};
+
+export const productListMastersReducer = (state = { masters: [] }, action) => {
+  switch (action.type) {
+    case PRODUCT_LIST_MASTERS_REQUEST:
+      return { loading: true, masters: [] };
+    case PRODUCT_LIST_MASTERS_SUCCESS:
+      return {
+        loading: false,
+        masters: action.payload.products,
+        pages: action.payload.products,
+        page: action.payload.page,
+      };
+    case PRODUCT_LIST_MASTERS_FAIL:
       return { loading: false, error: action.playload };
     default:
       return state;

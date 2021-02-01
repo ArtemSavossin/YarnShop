@@ -31,10 +31,10 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.12",
     "multer": "^1.4.2",
-    "nodemailer": "^6.4.17",
     "path": "^0.12.7",
     "react-html-email": "^3.0.0",
-    "sendmail": "^1.6.1"
+    "sendmail": "^1.6.1",
+    "telegraf": "^4.0.2"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

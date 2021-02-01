@@ -43,29 +43,30 @@ const OrderListScreen = ({ history }) => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => {
-              order.itemsPrice = order.orderItems.reduce(
-                (acc, item) => acc + item.price * item.qty,
-                0
-              );
-              return (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.user.name}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.itemsPrice}</td>
-                  <td>{order.isPaid ? '✅' : '❌'}</td>
-                  <td>{order.isFinished ? '✅' : '❌'}</td>
-                  <td>
-                    <LinkContainer to={`/orders/${order._id}`}>
-                      <Button className='btn-sm' variant='light'>
-                        Подробнее
-                      </Button>
-                    </LinkContainer>
-                  </td>
-                </tr>
-              );
-            })}
+            {orders &&
+              orders.map((order) => {
+                order.itemsPrice = order.orderItems.reduce(
+                  (acc, item) => acc + item.price * item.qty,
+                  0
+                );
+                return (
+                  <tr key={order._id}>
+                    <td>{order._id}</td>
+                    <td>{order.user ? order.user.name : 'Нет имени'}</td>
+                    <td>{order.createdAt.substring(0, 10)}</td>
+                    <td>{order.itemsPrice}</td>
+                    <td>{order.isPaid ? '✅' : '❌'}</td>
+                    <td>{order.isFinished ? '✅' : '❌'}</td>
+                    <td>
+                      <LinkContainer to={`/orders/${order._id}`}>
+                        <Button className='btn-sm' variant='light'>
+                          Подробнее
+                        </Button>
+                      </LinkContainer>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </Table>
       )}

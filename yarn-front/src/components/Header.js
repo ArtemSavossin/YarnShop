@@ -173,19 +173,19 @@ const Header = () => {
                 />
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer className='pointer' to='/orders'>
-              <Nav.Link>
-                <NavButton
-                  name='Заказы'
-                  icon={<FiPackage style={{ fontSize: '35px' }} />}
-                />
-              </Nav.Link>
-            </LinkContainer>
             <LinkContainer className='pointer' to='/contacts'>
               <Nav.Link>
                 <NavButton
                   name='Контакты'
                   icon={<FiPhone style={{ fontSize: '35px' }} />}
+                />
+              </Nav.Link>
+            </LinkContainer>
+            <LinkContainer className='pointer' to='/orders'>
+              <Nav.Link>
+                <NavButton
+                  name='Заказы'
+                  icon={<FiPackage style={{ fontSize: '35px' }} />}
                 />
               </Nav.Link>
             </LinkContainer>
