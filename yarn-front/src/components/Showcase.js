@@ -112,7 +112,7 @@ export const BottomsShowcase = () => {
 
   return (
     <>
-      <h3>Крючки</h3>
+      <h3>Донышки</h3>
       <Table responsive size='sm' className='pt-2'>
         {loading ? (
           <Loader />
