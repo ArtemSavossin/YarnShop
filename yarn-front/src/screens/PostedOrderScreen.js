@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
+  ORDER_CREATE_RESET,
 } from '../constants/orderConstants';
 
 const PostedOrderScreen = ({ match, history }) => {
@@ -22,6 +23,7 @@ const PostedOrderScreen = ({ match, history }) => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
+    dispatch({ type: ORDER_CREATE_RESET });
     if (!userInfo) {
       history.push('/login');
     }

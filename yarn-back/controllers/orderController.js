@@ -2,10 +2,9 @@ import dotenv from 'dotenv';
 import { Telegraf } from 'telegraf';
 import asyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
+import User from '../models/userModel.js';
 
 dotenv.config();
-
-const bot = new Telegraf(process.env.TELEGRAM);
 
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
@@ -20,7 +19,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
-    throw new Error('No order items');
+    throw new Error('В заказе нет товаров');
     return;
   } else {
     const order = new Order({
@@ -33,10 +32,22 @@ const addOrderItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     });
-
     const createdOrder = await order.save();
-    bot.telegram.sendMessage(process.env.TELEGRAM_CHATID, 'Новый заказ!');
+
     res.status(201).json(createdOrder);
+
+    const bot = new Telegraf(process.env.TELEGRAM);
+    bot.launch();
+    const user = await User.findById(req.user._id);
+    let message = `Новый заказ\n${user.name} - ${user.email} - ${user.phone}
+    \nАдрес доставки ${shippingAddress.address} - ${shippingAddress.city} - ${shippingAddress.deliveryType}
+    \nЦена: ${order.itemsPrice}
+    \nВ заказе ${orderItems.length} item`;
+    for (let i = 0; i < orderItems.length; ++i) {
+      message += `\n${orderItems[i].name} - ${orderItems[i].qty}`;
+    }
+    bot.telegram.sendMessage(process.env.TELEGRAM_CHATID, message);
+    bot.telegram.sendMessage(process.env.NASTYAID, message);
   }
 });
 //

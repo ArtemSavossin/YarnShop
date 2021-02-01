@@ -15,7 +15,6 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = ({ history, match, location }) => {
   const productId = match.params.id;
-  console.log(match.params);
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 
   const dispatch = useDispatch();
@@ -44,7 +43,6 @@ const CartScreen = ({ history, match, location }) => {
         ) : (
           <ListGroup variant='flush'>
             {cartItems.map((item) => {
-              console.log(item);
               return (
                 <ListGroup.Item key={item.product}>
                   <Row>
