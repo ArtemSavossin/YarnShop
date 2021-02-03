@@ -304,7 +304,7 @@ const Header = () => {
                 }, 5000);
               }}
             >
-              Товары &#x25BC;
+              Товары {showExtra ? '▲' : '▼'}
             </Col>
             <LinkContainer className='pointer' to='/help'>
               <Col xs={6}>Подсказки</Col>
@@ -314,23 +314,26 @@ const Header = () => {
         <Col sm={1} xs={2}></Col>
         {showExtra ? (
           <Col xs={12}>
-            <Row style={{ textAlign: 'center', opacity: '80%' }}>
+            <div
+              className='d-flex justify-content-around'
+              style={{ textAlign: 'center', opacity: '80%' }}
+            >
               <LinkContainer className='pointer' to='/yarn'>
-                <Col xs={2}>Пряжа</Col>
+                <div xs={2}>Пряжа</div>
               </LinkContainer>
               <LinkContainer className='pointer' to='/hooks'>
-                <Col xs={2}>Крючки</Col>
+                <div xs={2}>Крючки</div>
               </LinkContainer>
               <LinkContainer className='pointer' to='/bottoms'>
-                <Col xs={4}>Донышки</Col>
+                <div xs={4}>Донышки</div>
               </LinkContainer>
               <LinkContainer className='pointer' to='/sets'>
-                <Col xs={2}>Наборы</Col>
+                <div xs={2}>Наборы</div>
               </LinkContainer>
               <LinkContainer className='pointer' to='/masters'>
-                <Col xs={2}>MK</Col>
+                <div xs={2}>MK</div>
               </LinkContainer>
-            </Row>
+            </div>
           </Col>
         ) : (
           <></>
