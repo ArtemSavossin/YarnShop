@@ -161,7 +161,7 @@ const Footer = () => {
                   target='_blank'
                   rel='noreferrer'
                 >
-                  Разаработчик сайта
+                  Разаработчик
                 </a>
               </Col>
             </Row>
