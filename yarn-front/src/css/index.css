@@ -9,6 +9,10 @@ body {
 a {
   color: var(--primary);
 }
+a:visited {
+  color: var(--primary);
+  text-decoration: none;
+}
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
@@ -126,4 +130,24 @@ main {
 .active {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+}
+
+.helpscreen-text {
+  font-size: 18px;
+}
+
+.list-doted {
+  list-style-type: disc !important;
+}
+
+.list-doted__inside {
+  list-style-type: circle !important;
+}
+
+@media (min-width: 900px) {
+  .wiki-nav {
+    margin: 20px;
+    margin-left: -15px;
+    padding: 0;
+  }
 }
