@@ -31,6 +31,17 @@ const PaymentScreen = ({ history }) => {
     }
     // eslint-disable-next-line
   }, [success, history]);
+  /*
+  const placeOrderHandler = useCallback(() => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        itemsPrice: cart.itemsPrice,
+      })
+    );
+  }, []);
+  */
   const placeOrderHandler = () => {
     dispatch(
       createOrder({
