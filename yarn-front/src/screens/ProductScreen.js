@@ -112,7 +112,7 @@ const ProductScreen = ({ history, match }) => {
                 disabled={!product.countInStock}
                 onClick={addToCartHandler}
               >
-                Добавить в корзину
+                {product.countInStock === 0 ? 'Нет на складе' : 'В корзину'}
               </Button>
             </Card>
           </Col>

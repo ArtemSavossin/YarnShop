@@ -62,7 +62,7 @@ const Product = ({ product, notYarn }) => {
                   setTimeout(() => setShowAdded(false), 3000);
                 }}
               >
-                В корзину
+                {product.countInStock === 0 ? 'Нет на складе' : 'В корзину'}
               </Button>
             </OverlayTrigger>
           </Card.Body>
