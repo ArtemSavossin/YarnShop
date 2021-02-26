@@ -54,6 +54,7 @@ const Product = ({ product, notYarn }) => {
                 className='y-primary'
                 size='sm'
                 type='button'
+                disabled={product.countInStock === 0}
                 onClick={(e) => {
                   e.preventDefault();
                   dispatch(addToCart(product._id, 1));
